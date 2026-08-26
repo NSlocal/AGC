@@ -8,18 +8,16 @@
     android:gravity="center"
     android:elevation="10dp">
 
-    <!-- FPS — HIJAU -->
     <TextView
         android:id="@+id/overlay_fps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FPS 60/60"
+        android:text="FPS 60"
         android:textColor="#4CAF50"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginEnd="10dp"/>
 
-    <!-- GPU — PUTIH -->
     <TextView
         android:id="@+id/overlay_gpu"
         android:layout_width="wrap_content"
@@ -29,7 +27,6 @@
         android:textSize="14sp"
         android:layout_marginEnd="10dp"/>
 
-    <!-- CPU — PUTIH -->
     <TextView
         android:id="@+id/overlay_cpu"
         android:layout_width="wrap_content"
@@ -39,7 +36,6 @@
         android:textSize="14sp"
         android:layout_marginEnd="10dp"/>
 
-    <!-- SUHU — MERAH -->
     <TextView
         android:id="@+id/overlay_temp"
         android:layout_width="wrap_content"
@@ -49,7 +45,6 @@
         android:textSize="14sp"
         android:layout_marginEnd="10dp"/>
 
-    <!-- BATERAI — PUTIH -->
     <TextView
         android:id="@+id/overlay_battery"
         android:layout_width="wrap_content"

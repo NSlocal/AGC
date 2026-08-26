@@ -5,7 +5,6 @@ import android.util.Log
 
 class SafetyCoreApp : Application() {
     companion object {
-        private const val TAG = "SafetyCoreApp"
         lateinit var instance: SafetyCoreApp
             private set
     }
@@ -13,6 +12,6 @@ class SafetyCoreApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        Log.d(TAG, "✅ SafetyCore App Initialized")
+        Log.d("SafetyCoreApp", "✅ App Initialized")
     }
 }

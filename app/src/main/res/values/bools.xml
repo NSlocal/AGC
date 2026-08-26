@@ -1,0 +1,12 @@
+<resources>
+    <bool name="default_enabled">true</bool>
+    <bool name="default_scan_enabled">true</bool>
+    <bool name="default_nudity_warn">true</bool>
+    <bool name="default_sensitive_warn">true</bool>
+    <bool name="default_blur_enabled">true</bool>
+    <bool name="default_game_booster">true</bool>
+    <bool name="default_fps_unlock">true</bool>
+    <bool name="default_anti_lag">true</bool>
+    <bool name="default_thermal_bypass">true</bool>
+    <bool name="default_performance_mode">true</bool>
+</resources>

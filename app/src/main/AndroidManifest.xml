@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
     <uses-sdk android:minSdkVersion="34" android:targetSdkVersion="34" />
-
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <application
         android:name=".SafetyCoreApp"
         android:allowBackup="false"
         android:label="SafetyCore"
         android:icon="@drawable/ic_safety_core"
         android:theme="@style/Theme.SafetyCore">
-
         <service android:name=".SafetyCoreService" android:exported="false" />
         <service android:name=".overlay.FPSOverlayService" android:exported="false" />
-
         <activity android:name=".ui.SettingsActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

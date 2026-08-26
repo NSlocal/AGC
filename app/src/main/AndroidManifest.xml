@@ -11,7 +11,8 @@
         android:name=".SafetyCoreApp"
         android:allowBackup="false"
         android:label="SafetyCore"
-        android:icon="@drawable/ic_safety_core">
+        android:icon="@drawable/ic_safety_core"
+        android:theme="@style/Theme.SafetyCore">  <!-- ✅ WAJIB INI! -->
 
         <service
             android:name=".SafetyCoreService"

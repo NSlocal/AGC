@@ -14,7 +14,6 @@ import com.google.android.safetycore.SafetyCoreService
 import com.google.android.safetycore.overlay.FPSOverlayService
 
 class SettingsActivity : AppCompatActivity() {
-
     private lateinit var switchGlobal: Switch
     private lateinit var btnOverlay: Button
     private lateinit var btnGameBooster: Button
@@ -23,7 +22,6 @@ class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_safetycore_settings)
-
         switchGlobal = findViewById(R.id.switch_global_enable)
         btnOverlay = findViewById(R.id.btn_toggle_overlay)
         btnGameBooster = findViewById(R.id.btn_go_game_booster)
@@ -41,19 +39,13 @@ class SettingsActivity : AppCompatActivity() {
                 FPSOverlayService.stop(this)
                 Toast.makeText(this, "✅ Overlay Dimatikan", Toast.LENGTH_SHORT).show()
             } else {
-                if (checkOverlayPermission()) {
-                    FPSOverlayService.start(this)
-                    Toast.makeText(this, "✅ Overlay Dinyalakan", Toast.LENGTH_SHORT).show()
-                } else {
-                    requestOverlayPermission()
-                }
+                if (checkOverlayPermission()) FPSOverlayService.start(this)
+                else requestOverlayPermission()
             }
             updateOverlayButton()
         }
 
-        btnGameBooster.setOnClickListener {
-            startActivity(Intent(this, GameBoosterActivity::class.java))
-        }
+        btnGameBooster.setOnClickListener { startActivity(Intent(this, GameBoosterActivity::class.java)) }
     }
 
     private fun updateOverlayButton() {
@@ -66,36 +58,25 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkOverlayPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Settings.canDrawOverlays(this)
-        } else true
-    }
+    private fun checkOverlayPermission() =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Settings.canDrawOverlays(this) else true
 
     private fun requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val intent = Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName")
-            )
-            startActivityForResult(intent, REQUEST_OVERLAY)
+            val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+            startActivityForResult(i, REQUEST_OVERLAY)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_OVERLAY) {
+    override fun onActivityResult(req: Int, res: Int, d: Intent?) {
+        super.onActivityResult(req, res, d)
+        if (req == REQUEST_OVERLAY) {
             if (checkOverlayPermission()) {
                 FPSOverlayService.start(this)
-                Toast.makeText(this, "✅ Izin diberikan! Overlay aktif", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(this, "⚠️ Izin ditolak", Toast.LENGTH_LONG).show()
-            }
+                Toast.makeText(this, "✅ Izin diberikan!", Toast.LENGTH_SHORT).show()
+            } else Toast.makeText(this, "⚠️ Izin ditolak", Toast.LENGTH_LONG).show()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateOverlayButton()
-    }
+    override fun onResume() { super.onResume(); updateOverlayButton() }
 }

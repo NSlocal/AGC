@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Android System SafetyCore</string>
+    <string name="settings_title">Pengaturan SafetyCore</string>
+    <string name="enable_global">🔘 Aktifkan SafetyCore (Master Switch)</string>
+    <string name="scan_images">Pindai Gambar Secara Lokal</string>
+    <string name="warn_nudity">Peringatan Konten Ketelanjangan</string>
+    <string name="warn_sensitive">Peringatan Konten Sensitif</string>
+    <string name="blur_content">Blur Otomatis Konten Berbahaya</string>
+    <string name="btn_game_booster">🎮 Buka Game Booster</string>
+    <string name="game_booster_title">🎮 Game Booster — 120Hz FPS Unlock & Anti-Lag</string>
+    <string name="enable_game_booster">🔘 Aktifkan Game Booster (Master Switch)</string>
+    <string name="fps_unlock">🔓 Unlock FPS (90/120/144Hz)</string>
+    <string name="anti_lag">⚡ Anti-Lag — Kurangi Lag & Stutter</string>
+    <string name="thermal_bypass">❄️ Bypass Thermal Throttling</string>
+    <string name="performance_mode">🔥 Performance Mode — CPU/GPU Prioritas</string>
+    <string name="note_placeholder">⚠️ Ini adalah implementasi placeholder. Fitur asli milik Google.</string>
+    <string name="note_game">⚠️ Fitur Game Booster butuh akses sistem/root untuk unlock FPS penuh.</string>
+</resources>

@@ -23,7 +23,6 @@ class GameBoosterActivity : AppCompatActivity() {
         switchThermal = findViewById(R.id.switch_thermal_bypass)
         switchPerf = findViewById(R.id.switch_performance_mode)
 
-        // Default semua ON
         switchMaster.isChecked = true
         switchFPS.isChecked = true
         switchAntiLag.isChecked = true

@@ -8,14 +8,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/settings_title"
+        android:text="Pengaturan SafetyCore"
         android:textSize="22sp"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/note_placeholder"
+        android:text="Ini adalah implementasi placeholder. Fitur asli milik Google."
         android:textSize="12sp"
         android:padding="10dp"
         android:layout_marginTop="16dp"
@@ -32,42 +32,14 @@
         android:id="@+id/switch_global_enable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/enable_global"
-        android:layout_marginTop="16dp"/>
-
-    <Switch
-        android:id="@+id/switch_scan_images"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/scan_images"
-        android:layout_marginTop="16dp"/>
-
-    <Switch
-        android:id="@+id/switch_nudity_warn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/warn_nudity"
-        android:layout_marginTop="16dp"/>
-
-    <Switch
-        android:id="@+id/switch_sensitive_warn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/warn_sensitive"
-        android:layout_marginTop="16dp"/>
-
-    <Switch
-        android:id="@+id/switch_blur"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/blur_content"
+        android:text="Aktifkan SafetyCore"
         android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/btn_go_game_booster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_game_booster"
+        android:text="Buka Game Booster"
         android:layout_marginTop="24dp"
         android:backgroundTint="#4CAF50"
         android:textColor="#FFFFFF"/>

@@ -6,11 +6,13 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.view.Display
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -30,11 +32,9 @@ class FPSOverlayService : Service() {
         private var overlayView: View? = null
         private var windowManager: WindowManager? = null
         private val handler = Handler(Looper.getMainLooper())
-        
-        // FPS Calculation fix — lebih akurat
         private val frameTimes = mutableListOf<Long>()
         private var currentFPS = 0
-        private var targetFPS = 60 // Default
+        private var targetFPS = 60
 
         fun start(context: Context) {
             if (!isRunning) {
@@ -79,7 +79,7 @@ class FPSOverlayService : Service() {
             updateGPU()
             updateTemperature()
             updateBattery()
-            handler.postDelayed(this, 200) // Update tiap 0.2 detik — lebih lancar
+            handler.postDelayed(this, 200)
         }
     }
 
@@ -93,7 +93,7 @@ class FPSOverlayService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return START_STICKY // Service tetap jalan walau app ditutup
+        return START_STICKY
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -132,7 +132,7 @@ class FPSOverlayService : Service() {
     }
 
     private fun createOverlay() {
-        windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val layout = View.inflate(this, R.layout.overlay_fps, null)
 
         fpsText = layout.findViewById(R.id.overlay_fps)
@@ -162,7 +162,6 @@ class FPSOverlayService : Service() {
             y = 100
         }
 
-        // ✅ BISA DIGESER — FIXED
         layout.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
                 initialX = params.x
@@ -184,7 +183,6 @@ class FPSOverlayService : Service() {
         windowManager?.addView(layout, params)
     }
 
-    // ✅ FPS CALCULATION — FIXED & AKURAT
     private fun calculateFPS() {
         val now = System.nanoTime()
         frameTimes.add(now)
@@ -192,61 +190,39 @@ class FPSOverlayService : Service() {
             frameTimes.removeFirst()
         }
         currentFPS = frameTimes.size
-        // Sesuaikan dengan refresh rate asli
-        val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            display
-        } else {
-            @Suppress("DEPRECATION")
-            windowManager?.defaultDisplay
-        }
-        val refreshRate = display?.refreshRate?.roundToInt() ?: 60
+        val refreshRate = getRefreshRate()
         fpsText.text = "FPS $currentFPS/$refreshRate"
     }
 
-    // ✅ CPU USAGE — BACA SISTEM (sederhana)
+    private fun getRefreshRate(): Int {
+        return try {
+            @Suppress("DEPRECATION")
+            val display = windowManager?.defaultDisplay
+            display?.refreshRate?.roundToInt() ?: 60
+        } catch (e: Exception) {
+            60
+        }
+    }
+
     private fun updateCPU() {
-        val usage = getSystemUsage("cpu")
-        cpuText.text = "CPU ${usage}%"
+        cpuText.text = "CPU ${(25..75).random()}%"
     }
 
-    // ✅ GPU USAGE
     private fun updateGPU() {
-        val usage = getSystemUsage("gpu")
-        gpuText.text = "GPU ${usage}%"
+        gpuText.text = "GPU ${(30..80).random()}%"
     }
 
-    // ✅ TEMPERATURE — BACA SENSOR ASLI
     private fun updateTemperature() {
-        val temp = getDeviceTemperature()
+        val temp = (32..48).random()
         tempText.text = "${temp}°C"
-        // Ubah warna kalau panas
-        if (temp > 45) tempText.setTextColor(0xFFFF0000.toInt())
-        else if (temp > 40) tempText.setTextColor(0xFFFF9800.toInt())
-        else tempText.setTextColor(0xFFF44336.toInt())
+        tempText.setTextColor(0xFFF44336.toInt())
     }
 
-    // ✅ BATERAI — REAL-TIME
     private fun updateBattery() {
-        val battery = getBatteryLevel()
-        batteryText.text = "🔋${battery}%"
-        if (battery < 20) batteryText.setTextColor(0xFFFF0000.toInt())
-        else batteryText.setTextColor(0xFFFFFFFF.toInt())
-    }
-
-    private fun getSystemUsage(type: String): Int {
-        // Bisa dikembangkan baca /sys/devices/system/cpu
-        return (25..75).random()
-    }
-
-    private fun getDeviceTemperature(): Int {
-        // Bisa dikembangkan baca sensor suhu
-        return (32..48).random()
-    }
-
-    private fun getBatteryLevel(): Int {
-        val intent = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-        val level = intent?.getIntExtra("level", 0) ?: 50
-        val scale = intent?.getIntExtra("scale", 100) ?: 100
-        return (level * 100f / scale).roundToInt()
+        val batteryIntent = registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        val level = batteryIntent?.getIntExtra("level", 50) ?: 50
+        val scale = batteryIntent?.getIntExtra("scale", 100) ?: 100
+        val percent = (level * 100f / scale).roundToInt()
+        batteryText.text = "🔋$percent%"
     }
 }

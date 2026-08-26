@@ -3,9 +3,7 @@
 
     <uses-sdk android:minSdkVersion="34" android:targetSdkVersion="34" />
 
-    <!-- ✅ IZIN WAJIB — TANPA INI APP CRASH! -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -14,16 +12,12 @@
         android:allowBackup="false"
         android:label="SafetyCore"
         android:icon="@drawable/ic_safety_core"
-        android:persistent="true"
-        android:foregroundServiceType="dataSync">
+        android:persistent="true">
 
-        <!-- ✅ Service -->
         <service
             android:name=".SafetyCoreService"
-            android:exported="false"
-            android:foregroundServiceType="dataSync" />
+            android:exported="false" />
 
-        <!-- ✅ MAIN ACTIVITY — WAJIB ADA BIAR APP BISA DIBUKA! -->
         <activity
             android:name=".ui.SettingsActivity"
             android:exported="true">

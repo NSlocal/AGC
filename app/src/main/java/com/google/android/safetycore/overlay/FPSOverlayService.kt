@@ -12,7 +12,6 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.view.Display
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -25,16 +24,16 @@ import kotlin.math.roundToInt
 class FPSOverlayService : Service() {
 
     companion object {
-        const val CHANNEL_ID = "SafetyCoreOverlayChannel"
+        const val CHANNEL_ID = "SafetyCoreOverlay"
         const val NOTIFICATION_ID = 1001
         var isRunning = false
             private set
         private var overlayView: View? = null
         private var windowManager: WindowManager? = null
         private val handler = Handler(Looper.getMainLooper())
-        private val frameTimes = mutableListOf<Long>()
+        private var frameCount = 0
+        private var lastTime = System.nanoTime()
         private var currentFPS = 0
-        private var targetFPS = 60
 
         fun start(context: Context) {
             if (!isRunning) {
@@ -50,13 +49,6 @@ class FPSOverlayService : Service() {
         fun stop(context: Context) {
             if (isRunning) {
                 context.stopService(Intent(context, FPSOverlayService::class.java))
-            }
-        }
-
-        fun setTargetFPS(fps: Int) {
-            targetFPS = when (fps) {
-                60, 90, 120, 144 -> fps
-                else -> 60
             }
         }
     }
@@ -79,7 +71,7 @@ class FPSOverlayService : Service() {
             updateGPU()
             updateTemperature()
             updateBattery()
-            handler.postDelayed(this, 200)
+            handler.postDelayed(this, 500)
         }
     }
 
@@ -112,9 +104,7 @@ class FPSOverlayService : Service() {
                 CHANNEL_ID,
                 "SafetyCore Monitor",
                 NotificationManager.IMPORTANCE_LOW
-            ).apply {
-                description = "Overlay FPS & Performance Monitor"
-            }
+            ).apply { description = "FPS & Performance Monitor" }
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.createNotificationChannel(channel)
         }
@@ -184,24 +174,15 @@ class FPSOverlayService : Service() {
     }
 
     private fun calculateFPS() {
+        frameCount++
         val now = System.nanoTime()
-        frameTimes.add(now)
-        while (frameTimes.isNotEmpty() && now - frameTimes.first() > 1_000_000_000L) {
-            frameTimes.removeFirst()
+        val elapsed = (now - lastTime) / 1_000_000_000.0
+        if (elapsed >= 1.0) {
+            currentFPS = (frameCount / elapsed).roundToInt()
+            frameCount = 0
+            lastTime = now
         }
-        currentFPS = frameTimes.size
-        val refreshRate = getRefreshRate()
-        fpsText.text = "FPS $currentFPS/$refreshRate"
-    }
-
-    private fun getRefreshRate(): Int {
-        return try {
-            @Suppress("DEPRECATION")
-            val display = windowManager?.defaultDisplay
-            display?.refreshRate?.roundToInt() ?: 60
-        } catch (e: Exception) {
-            60
-        }
+        fpsText.text = "FPS $currentFPS"
     }
 
     private fun updateCPU() {
@@ -215,7 +196,6 @@ class FPSOverlayService : Service() {
     private fun updateTemperature() {
         val temp = (32..48).random()
         tempText.text = "${temp}°C"
-        tempText.setTextColor(0xFFF44336.toInt())
     }
 
     private fun updateBattery() {

@@ -12,6 +12,10 @@ class SafetyCoreApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        Log.d("SafetyCoreApp", "✅ App Initialized")
+        try {
+            Log.d("SafetyCoreApp", "✅ App Initialized")
+        } catch (e: Exception) {
+            Log.e("SafetyCoreApp", "⚠️ Init error: ${e.message}")
+        }
     }
 }

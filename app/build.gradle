@@ -1,11 +1,11 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
 android {
     namespace 'com.google.android.safetycore'
     compileSdk 34
-
-    // ✅ TAMBAH INI — WAJIB BUAT LAYOUT!
-    buildFeatures {
-        viewBinding true
-    }
 
     defaultConfig {
         applicationId "com.google.android.safetycore"

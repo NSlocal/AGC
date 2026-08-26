@@ -11,11 +11,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.safetycore.R
 import com.google.android.safetycore.SafetyCoreService
+import com.google.android.safetycore.overlay.FPSOverlayService
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var switchGlobal: Switch
     private lateinit var btnGameBooster: Button
+    private lateinit var btnOverlay: Button
     private val REQUEST_OVERLAY = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +28,12 @@ class SettingsActivity : AppCompatActivity() {
 
             switchGlobal = findViewById(R.id.switch_global_enable)
             btnGameBooster = findViewById(R.id.btn_go_game_booster)
+            btnOverlay = findViewById(R.id.btn_toggle_overlay)
 
-            // Cek & minta izin — TANPA CRASH kalau ditolak
             checkOverlayPermission()
 
-            // Set status awal
             switchGlobal.isChecked = SafetyCoreService.isEnabled(this)
 
-            // Listener
             switchGlobal.setOnCheckedChangeListener { _, isChecked ->
                 SafetyCoreService.setEnabled(this, isChecked)
                 Toast.makeText(this, if (isChecked) "✅ SafetyCore Aktif" else "❌ Dinonaktifkan", Toast.LENGTH_SHORT).show()
@@ -41,6 +41,25 @@ class SettingsActivity : AppCompatActivity() {
 
             btnGameBooster.setOnClickListener {
                 startActivity(Intent(this, GameBoosterActivity::class.java))
+            }
+
+            btnOverlay.setOnClickListener {
+                if (FPSOverlayService.isRunning) {
+                    FPSOverlayService.stop(this)
+                    Toast.makeText(this, "✅ Overlay Dimatikan", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (Settings.canDrawOverlays(this)) {
+                        FPSOverlayService.start(this)
+                        Toast.makeText(this, "✅ Overlay Dinyalakan", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "⚠️ Izinkan tampil di atas aplikasi lain dulu!", Toast.LENGTH_LONG).show()
+                        val intent = Intent(
+                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                            Uri.parse("package:$packageName")
+                        )
+                        startActivityForResult(intent, REQUEST_OVERLAY)
+                    }
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()

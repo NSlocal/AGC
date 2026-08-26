@@ -40,11 +40,20 @@
         android:layout_marginTop="16dp"/>
 
     <Button
+        android:id="@+id/btn_toggle_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🔄 Tampilkan FPS Monitor"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#FF9800"
+        android:textColor="#FFFFFF"/>
+
+    <Button
         android:id="@+id/btn_go_game_booster"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Buka Game Booster"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#4CAF50"
         android:textColor="#FFFFFF"/>
 

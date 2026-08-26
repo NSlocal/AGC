@@ -1,10 +1,12 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
 android {
     namespace 'com.google.android.safetycore'
     compileSdk 34
+
+    // ✅ TAMBAH INI — WAJIB BUAT LAYOUT!
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "com.google.android.safetycore"
         minSdk 34
@@ -12,18 +14,21 @@ android {
         versionCode 966221264
         versionName "1.0.966221264"
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions { jvmTarget = '17' }
 }
+
 dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

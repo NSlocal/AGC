@@ -4,44 +4,58 @@
     android:layout_height="wrap_content"
     android:background="#CC000000"
     android:orientation="horizontal"
-    android:padding="8dp"
+    android:padding="8dp 12dp"
     android:gravity="center"
     android:elevation="10dp">
 
+    <!-- FPS — HIJAU -->
     <TextView
         android:id="@+id/overlay_fps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FPS 60"
+        android:text="FPS 60/60"
         android:textColor="#4CAF50"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:layout_marginEnd="12dp"/>
+        android:layout_marginEnd="10dp"/>
 
+    <!-- GPU — PUTIH -->
     <TextView
         android:id="@+id/overlay_gpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GPU 45%"
+        android:text="GPU 50%"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:layout_marginEnd="12dp"/>
+        android:layout_marginEnd="10dp"/>
 
+    <!-- CPU — PUTIH -->
     <TextView
         android:id="@+id/overlay_cpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CPU 30%"
+        android:text="CPU 40%"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:layout_marginEnd="12dp"/>
+        android:layout_marginEnd="10dp"/>
 
+    <!-- SUHU — MERAH -->
     <TextView
         android:id="@+id/overlay_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="38°C"
         android:textColor="#F44336"
+        android:textSize="14sp"
+        android:layout_marginEnd="10dp"/>
+
+    <!-- BATERAI — PUTIH -->
+    <TextView
+        android:id="@+id/overlay_battery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔋85%"
+        android:textColor="#FFFFFF"
         android:textSize="14sp"/>
 
 </LinearLayout>

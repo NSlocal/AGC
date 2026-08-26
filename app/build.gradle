@@ -25,6 +25,14 @@ android {
             debuggable true
         }
     }
+    
+    // ✅ Tambah ini — pastikan AIDL diproses!
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/aidl']
+        }
+    }
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17

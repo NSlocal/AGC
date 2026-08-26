@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#CC000000"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="center"
+    android:elevation="10dp">
+
+    <TextView
+        android:id="@+id/overlay_fps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FPS 60"
+        android:textColor="#4CAF50"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="12dp"/>
+
+    <TextView
+        android:id="@+id/overlay_gpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPU 45%"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_marginEnd="12dp"/>
+
+    <TextView
+        android:id="@+id/overlay_cpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CPU 30%"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:layout_marginEnd="12dp"/>
+
+    <TextView
+        android:id="@+id/overlay_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="38°C"
+        android:textColor="#F44336"
+        android:textSize="14sp"/>
+
+</LinearLayout>

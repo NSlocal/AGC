@@ -11,8 +11,7 @@
         android:name=".SafetyCoreApp"
         android:allowBackup="false"
         android:label="SafetyCore"
-        android:icon="@drawable/ic_safety_core"
-        android:persistent="true">
+        android:icon="@drawable/ic_safety_core">
 
         <service
             android:name=".SafetyCoreService"

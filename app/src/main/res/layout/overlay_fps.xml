@@ -5,11 +5,9 @@
     android:background="#CC000000"
     android:orientation="horizontal"
     android:padding="8dp 12dp"
-    android:gravity="center"
-    android:elevation="10dp">
+    android:gravity="center">
 
-    <TextView
-        android:id="@+id/overlay_fps"
+    <TextView android:id="@+id/overlay_fps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FPS 60"
@@ -18,8 +16,7 @@
         android:textStyle="bold"
         android:layout_marginEnd="10dp"/>
 
-    <TextView
-        android:id="@+id/overlay_gpu"
+    <TextView android:id="@+id/overlay_gpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GPU 50%"
@@ -27,8 +24,7 @@
         android:textSize="14sp"
         android:layout_marginEnd="10dp"/>
 
-    <TextView
-        android:id="@+id/overlay_cpu"
+    <TextView android:id="@+id/overlay_cpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CPU 40%"
@@ -36,8 +32,7 @@
         android:textSize="14sp"
         android:layout_marginEnd="10dp"/>
 
-    <TextView
-        android:id="@+id/overlay_temp"
+    <TextView android:id="@+id/overlay_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="38°C"
@@ -45,12 +40,10 @@
         android:textSize="14sp"
         android:layout_marginEnd="10dp"/>
 
-    <TextView
-        android:id="@+id/overlay_battery"
+    <TextView android:id="@+id/overlay_battery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="🔋85%"
         android:textColor="#FFFFFF"
         android:textSize="14sp"/>
-
 </LinearLayout>

@@ -1,51 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="966221264"
-    android:versionName="1.0.966221264">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="34" android:targetSdkVersion="34" />
-
-    <uses-permission android:name="android.permission.ACCESS_CONTENT_SAFETY_SERVICE" />
-    <uses-permission android:name="android.permission.MANAGE_SAFETY_CORE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
     <application
         android:name=".SafetyCoreApp"
         android:allowBackup="false"
-        android:label="Android System SafetyCore"
+        android:label="SafetyCore"
         android:icon="@drawable/ic_safety_core"
         android:persistent="true">
-
-        <service
-            android:name=".SafetyCoreService"
-            android:exported="true"
-            android:permission="android.permission.ACCESS_CONTENT_SAFETY_SERVICE"
-            android:foregroundServiceType="dataSync">
-            <intent-filter>
-                <action android:name="com.google.android.safetycore.ISafetyCoreService" />
-            </intent-filter>
-        </service>
-
-        <activity
-            android:name=".ui.SettingsActivity"
-            android:exported="true"
-            android:permission="android.permission.MANAGE_SAFETY_CORE">
+        <service android:name=".SafetyCoreService" android:exported="false" />
+        <activity android:name=".ui.SettingsActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".ui.GameBoosterActivity"
-            android:exported="true"
-            android:permission="android.permission.MANAGE_SAFETY_CORE">
-            <intent-filter>
-                <action android:name="com.google.android.safetycore.OPEN_GAME_BOOSTER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".ui.GameBoosterActivity" android:exported="true" />
     </application>
 </manifest>

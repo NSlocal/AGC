@@ -1,49 +1,16 @@
-plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-}
-
-android {
-    namespace 'com.google.android.safetycore'
-    compileSdk 34
-
-    defaultConfig {
-        applicationId "com.google.android.safetycore"
-        minSdk 34
-        targetSdk 34
-        versionCode 966221264
-        versionName "1.0.966221264"
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
     }
-
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            applicationIdSuffix ".debug"
-            debuggable true
-        }
-    }
-
-    // ✅ WAJIB — Lokasi AIDL
-    sourceSets {
-        main {
-            aidl.srcDirs = ['src/main/aidl']
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = '17'
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.2.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20"
     }
 }
 
-dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
+// ✅ HAPUS blok allprojects { repositories { ... } } — sudah di settings.gradle!
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }

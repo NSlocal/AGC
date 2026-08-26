@@ -20,17 +20,6 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            applicationIdSuffix ".debug"
-            debuggable true
-        }
-    }
-
-    // ✅ WAJIB — Lokasi AIDL
-    sourceSets {
-        main {
-            aidl.srcDirs = ['src/main/aidl']
-        }
     }
 
     compileOptions {

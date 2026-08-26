@@ -1,75 +1,77 @@
-package com.google.android.safetycore.ui
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-import android.os.Bundle
-import android.widget.Switch
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.safetycore.R
-import com.google.android.safetycore.game.GameBooster
-import com.google.android.safetycore.game.GameList
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_booster_title"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
-class GameBoosterActivity : AppCompatActivity() {
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/note_game"
+        android:textSize="12sp"
+        android:padding="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#E3F2FD"
+        android:textColor="#1565C0"/>
 
-    private lateinit var gameBooster: GameBooster
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CCCCCC"/>
 
-    private lateinit var switchGameBoosterMaster: Switch
-    private lateinit var switchFPSUnlock: Switch
-    private lateinit var switchAntiLag: Switch
-    private lateinit var switchThermalBypass: Switch
-    private lateinit var switchPerformanceMode: Switch
-    private lateinit var tvGameList: TextView
+    <Switch
+        android:id="@+id/switch_gamebooster_master"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enable_game_booster"
+        android:layout_marginTop="16dp"/>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_booster)
+    <Switch
+        android:id="@+id/switch_fps_unlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fps_unlock"
+        android:layout_marginTop="16dp"/>
 
-        gameBooster = GameBooster(this)
-        initViews()
-        loadCurrentState()
-        setupListeners()
-        updateGameList()
-    }
+    <Switch
+        android:id="@+id/switch_anti_lag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/anti_lag"
+        android:layout_marginTop="16dp"/>
 
-    private fun initViews() {
-        switchGameBoosterMaster = findViewById(R.id.switch_gamebooster_master)
-        switchFPSUnlock = findViewById(R.id.switch_fps_unlock)
-        switchAntiLag = findViewById(R.id.switch_anti_lag)
-        switchThermalBypass = findViewById(R.id.switch_thermal_bypass)
-        switchPerformanceMode = findViewById(R.id.switch_performance_mode)
-        tvGameList = findViewById(R.id.tv_supported_games)
-    }
+    <Switch
+        android:id="@+id/switch_thermal_bypass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/thermal_bypass"
+        android:layout_marginTop="16dp"/>
 
-    private fun loadCurrentState() {
-        switchGameBoosterMaster.isChecked = gameBooster.isGameBoosterEnabled
-        switchFPSUnlock.isChecked = gameBooster.fpsUnlockEnabled
-        switchAntiLag.isChecked = gameBooster.antiLagEnabled
-        switchThermalBypass.isChecked = gameBooster.thermalBypassEnabled
-        switchPerformanceMode.isChecked = gameBooster.performanceModeEnabled
-        setAllGameSwitchesEnabled(switchGameBoosterMaster.isChecked)
-    }
+    <Switch
+        android:id="@+id/switch_performance_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/performance_mode"
+        android:layout_marginTop="16dp"/>
 
-    private fun setupListeners() {
-        switchGameBoosterMaster.setOnCheckedChangeListener { _, isChecked ->
-            gameBooster.isGameBoosterEnabled = isChecked
-            setAllGameSwitchesEnabled(isChecked)
-        }
-        switchFPSUnlock.setOnCheckedChangeListener { _, e -> gameBooster.fpsUnlockEnabled = e }
-        switchAntiLag.setOnCheckedChangeListener { _, e -> gameBooster.antiLagEnabled = e }
-        switchThermalBypass.setOnCheckedChangeListener { _, e -> gameBooster.thermalBypassEnabled = e }
-        switchPerformanceMode.setOnCheckedChangeListener { _, e -> gameBooster.performanceModeEnabled = e }
-    }
+    <TextView
+        android:id="@+id/tv_supported_games"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:padding="12dp"
+        android:background="#E8F5E9"
+        android:textColor="#2E7D32"
+        android:textSize="13sp"/>
 
-    private fun setAllGameSwitchesEnabled(enabled: Boolean) {
-        switchFPSUnlock.isEnabled = enabled
-        switchAntiLag.isEnabled = enabled
-        switchThermalBypass.isEnabled = enabled
-        switchPerformanceMode.isEnabled = enabled
-    }
-
-    private fun updateGameList() {
-        val games = GameList.supportedGames.joinToString("\n") {
-            "• ${it.name}\n  Paket: ${it.packageName}\n  Max FPS: ${it.maxSupportedFps}"
-        }
-        tvGameList.text = "🎮 Game Didukung:\n\n$games"
-    }
-}
+</LinearLayout>
+    

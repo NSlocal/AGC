@@ -2,19 +2,15 @@ package com.google.android.safetycore
 
 import android.content.Context
 import android.app.ActivityManager
-import android.app.Service
-import android.content.Intent
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 
 class ContentClassifier(private val context: Context) {
 
-    // ✅ FUNGSI YANG HILANG — DITAMBAHKAN DISINI
-    private fun isServiceEnabled(context: Context, serviceClass: Class<out Service>): Boolean {
+    // ✅ FUNGSI CEK SERVICE — VERSI AMAN, TANPA REFERENSI YANG HILANG
+    private fun isServiceEnabled(serviceName: String): Boolean {
         val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val runningServices = manager.getRunningServices(Int.MAX_VALUE)
-        val serviceName = serviceClass.name
         for (service in runningServices) {
             if (serviceName == service.service.className) {
                 return true
@@ -23,20 +19,19 @@ class ContentClassifier(private val context: Context) {
         return false
     }
 
-    // Contoh penggunaan di baris 23 yang error:
+    // ✅ CEK STATUS — TANPA FPSOverlayService yang belum ada
     fun checkOverlayServiceStatus(): Boolean {
-        // ✅ Sekarang fungsi ada — tidak error lagi!
-        return isServiceEnabled(context, FPSOverlayService::class.java)
+        // Sementara false, nanti kalau FPSOverlayService sudah dibuat → ganti
+        return isServiceEnabled("com.google.android.safetycore.FPSOverlayService")
     }
 
-    // --- SISA KODE FILE ---
+    // --- SISA KODE ---
     private val handler = Handler(Looper.getMainLooper())
     private var isMonitoring = false
 
     fun startMonitoring() {
         if (isMonitoring) return
         isMonitoring = true
-        // Logika pemantauan konten
     }
 
     fun stopMonitoring() {

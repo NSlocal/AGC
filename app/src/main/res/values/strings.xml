@@ -1,18 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Android System SafetyCore</string>
-    <string name="settings_title">Pengaturan SafetyCore</string>
-    <string name="enable_global">Aktifkan SafetyCore</string>
-    <string name="scan_images">Pindai Gambar Secara Lokal</string>
-    <string name="warn_nudity">Peringatan Konten Ketelanjangan</string>
-    <string name="warn_sensitive">Peringatan Konten Sensitif</string>
-    <string name="blur_content">Blur Otomatis Konten Berbahaya</string>
-    <string name="btn_game_booster">Buka Game Booster</string>
-    <string name="game_booster_title">Game Booster - 120Hz FPS Unlock &amp; Anti-Lag</string>
-    <string name="enable_game_booster">Aktifkan Game Booster</string>
+    <!-- App Name -->
+    <string name="app_name">SafetyCore Pro</string>
+    <string name="app_description">Game Booster &amp; Real-Time FPS Monitor — Drag &amp; Move Anywhere</string>
+
+    <!-- Main Settings -->
+    <string name="settings_title">SafetyCore Settings</string>
+    <string name="enable_global">Enable SafetyCore</string>
+
+    <!-- FPS Monitor -->
+    <string name="fps_monitor_title">FPS Monitor</string>
+    <string name="show_fps_monitor">SHOW FPS MONITOR</string>
+    <string name="stop_fps_monitor">STOP FPS MONITOR</string>
+    <string name="fps_monitor_running">FPS Monitor Running — Drag to Move</string>
+    <string name="fps_monitor_stopped">FPS Monitor Stopped</string>
+    <string name="overlay_permission_required">Overlay Permission Required</string>
+
+    <!-- Game Booster -->
+    <string name="game_booster_title">Game Booster — 120Hz FPS Unlock &amp; Anti-Lag</string>
+    <string name="btn_game_booster">Open Game Booster</string>
+    <string name="enable_game_booster">Enable Game Booster</string>
     <string name="fps_unlock">Unlock FPS (90/120/144Hz)</string>
-    <string name="anti_lag">Anti-Lag - Kurangi Lag &amp; Stutter</string>
+    <string name="anti_lag">Anti-Lag — Reduce Lag &amp; Stutter</string>
     <string name="thermal_bypass">Bypass Thermal Throttling</string>
-    <string name="performance_mode">Performance Mode - CPU/GPU Prioritas</string>
-    <string name="note_placeholder">Ini adalah implementasi placeholder. Fitur asli milik Google.</string>
-    <string name="note_game">Fitur Game Booster butuh akses sistem atau root untuk unlock FPS penuh.</string>
+    <string name="performance_mode">Performance Mode — CPU/GPU Priority</string>
+    <string name="graphics_smooth">Graphics Smooth — iOS-like Render</string>
+    <string name="battery_optimize">Battery Saver — Optimized Background</string>
+
+    <!-- Notes & Info -->
+    <string name="note_game">Game Booster requires root or system access to unlock full FPS.</string>
+    <string name="note_overlay">Overlay can be dragged anywhere on screen.</string>
+    <string name="note_fps">Real-time FPS calculation — 60/90/120Hz supported.</string>
+
+    <!-- Supported Games -->
+    <string name="supported_games">Supported Games</string>
+    <string name="game_qqspeed">QQ Speed / QQ飞车</string>
+    <string name="game_speeddrifters">Speed Drifters</string>
+    <string name="game_mlbb">Mobile Legends: Bang Bang</string>
+    <string name="game_pubg">PUBG Mobile</string>
+    <string name="game_ff">Free Fire</string>
+    <string name="game_codm">Call of Duty Mobile</string>
+    <string name="game_genshin">Genshin Impact</string>
+    <string name="all_games">All Games Supported</string>
+
+    <!-- Overlay Labels -->
+    <string name="label_fps">FPS</string>
+    <string name="label_cpu">CPU</string>
+    <string name="label_gpu">GPU</string>
+    <string name="label_temp">Temp</string>
+    <string name="label_battery">Batt</string>
 </resources>

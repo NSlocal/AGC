@@ -10,9 +10,9 @@ jobs:
       contents: read
       packages: write
       actions: write
-      
+
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup JDK 17
@@ -21,10 +21,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Permission
+      - name: Set Permission
         run: chmod +x gradlew
 
-      - name: Build
+      - name: Build Release APK
         run: ./gradlew assembleRelease
 
       - name: Upload APK

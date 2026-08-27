@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-sdk android:minSdkVersion="34" android:targetSdkVersion="34" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.google.android.safetycore">
+
+    <uses-sdk
+        android:minSdkVersion="34"
+        android:targetSdkVersion="34" />
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
     <application
         android:name=".SafetyCoreApp"
         android:allowBackup="false"
         android:label="SafetyCore"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".ui.SettingsActivity" android:exported="true">
+
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".overlay.FPSOverlayService" android:exported="false" />
+
+        <service
+            android:name=".overlay.FPSOverlayService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="overlay_display" />
+        </service>
+
     </application>
+
 </manifest>

@@ -2,14 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#DD000000"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:background="#CC000000"
+    android:padding="8dp"
+    android:elevation="100dp">
+
+    <!-- FPS — GREEN -->
     <TextView
-        android:id="@+id/fps_text"
+        android:id="@+id/tv_fps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FPS 60"
-        android:textColor="#4CAF50"
-        android:textSize="16sp"
+        android:text="FPS: 60"
+        android:textColor="#FF00FF00"
+        android:textSize="14sp"
         android:textStyle="bold"/>
+
+    <!-- CPU — WHITE -->
+    <TextView
+        android:id="@+id/tv_cpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CPU: 45%"
+        android:textColor="#FFFFFFFF"
+        android:textSize="12sp"/>
+
+    <!-- GPU — WHITE -->
+    <TextView
+        android:id="@+id/tv_gpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPU: 60%"
+        android:textColor="#FFFFFFFF"
+        android:textSize="12sp"/>
+
+    <!-- TEMP — RED -->
+    <TextView
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temp: 38°C"
+        android:textColor="#FFFF0000"
+        android:textSize="12sp"/>
+
+    <!-- BATTERY — ORANGE/WHITE -->
+    <TextView
+        android:id="@+id/tv_battery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batt: 85%"
+        android:textColor="#FFFFFF00"
+        android:textSize="12sp"/>
+
 </LinearLayout>

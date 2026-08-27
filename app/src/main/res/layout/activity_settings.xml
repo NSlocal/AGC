@@ -1,29 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F5F5"
-    android:gravity="center"
-    android:padding="24dp">
+    android:background="#F5F5F5">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SafetyCore"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="#6200EE"
-        android:layout_marginBottom="40dp"/>
-
-    <Button
-        android:id="@+id/btn_toggle_fps"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:text="SHOW FPS MONITOR"
-        android:background="#6200EE"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_marginHorizontal="16dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-</LinearLayout>
+        <!-- 🎯 HEADER -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SafetyCore Pro"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#6200EE"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Game Booster &amp; FPS Monitor"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="#757575"
+            android:layout_marginBottom="25dp"/>
+
+        <!-- 🎯 FPS MONITOR BUTTON -->
+        <Button
+            android:id="@+id/btn_toggle_fps"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="SHOW FPS MONITOR"
+            android:background="#6200EE"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:layout_marginBottom="25dp"/>
+
+        <!-- 🎯 GAME BOOSTER SECTION -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚡ Game Booster"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Requires root or system access for full features"
+            android:textSize="13sp"
+            android:padding="10dp"
+            android:background="#FFF3E0"
+            android:textColor="#E65100"
+            android:layout_marginBottom="15dp"/>
+
+        <!-- BOOSTER OPTIONS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="15dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✅ FPS Overlay — Drag &amp; Move Anywhere"
+                android:textSize="15sp"
+                android:paddingVertical="10dp"
+                android:textColor="#4CAF50"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎮 Unlock FPS 90/120/144Hz"
+                android:textSize="15sp"
+                android:paddingVertical="10dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🚀 Anti-Lag — Reduce Stutter &amp; Frame Drops"
+                android:textSize="15sp"
+                android:paddingVertical="10dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="❄️ Bypass Thermal Throttling"
+                android:textSize="15sp"
+                android:paddingVertical="10dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⚙️ Performance Mode — CPU/GPU Priority"
+                android:textSize="15sp"
+                android:paddingVertical="10dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎨 Graphics Smooth — iOS-like Render"
+                android:textSize="15sp"
+                android:paddingVertical="10dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🔋 Battery Saver — Optimized Background"
+                android:textSize="15sp"
+                android:paddingVertical="10dp"
+                android:textColor="#333333"/>
+        </LinearLayout>
+
+        <!-- 🎯 SUPPORTED GAMES -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🎯 Supported Games"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:layout_marginBottom="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏎️ QQ Speed / QQ飞车 (com.tencent.tmgp.speedmobile)"
+                android:textSize="14sp"
+                android:paddingVertical="8dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏎️ Speed Drifters (com.garena.game.fctw)"
+                android:textSize="14sp"
+                android:paddingVertical="8dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎮 Mobile Legends"
+                android:textSize="14sp"
+                android:paddingVertical="8dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎮 PUBG Mobile / CODM / Free Fire"
+                android:textSize="14sp"
+                android:paddingVertical="8dp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎮 Genshin Impact &amp; All Games"
+                android:textSize="14sp"
+                android:paddingVertical="8dp"
+                android:textColor="#333333"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n✅ Overlay: Drag anywhere on screen\n✅ Real-time FPS calculation\n✅ Transparent background\n✅ Full English UI"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:textColor="#757575"
+            android:paddingTop="20dp"/>
+
+    </LinearLayout>
+</ScrollView>

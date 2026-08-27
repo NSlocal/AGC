@@ -15,7 +15,7 @@
         android:allowBackup="false"
         android:label="SafetyCore"
         android:icon="@drawable/ic_launcher"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/Theme.SafetyCore">
 
         <activity
             android:name=".ui.SettingsActivity"

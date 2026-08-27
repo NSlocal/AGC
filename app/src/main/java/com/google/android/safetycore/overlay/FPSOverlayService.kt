@@ -16,18 +16,16 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.android.safetycore.R
 import kotlin.math.roundToInt
 
 class FPSOverlayService : android.app.Service() {
 
     companion object {
-        private val _isRunning = MutableLiveData(false)
-        val isRunning: LiveData<Boolean> = _isRunning
-        private const val NOTIFICATION_ID = 1002
-        private const val CHANNEL_ID = "FPS_Overlay_Channel"
+        var isRunning = false
+            private set
+        private const val NOTIFICATION_ID = 1001
+        private const val CHANNEL_ID = "FPS_Overlay"
     }
 
     private lateinit var windowManager: WindowManager
@@ -35,12 +33,6 @@ class FPSOverlayService : android.app.Service() {
     private val handler = Handler(Looper.getMainLooper())
     private var frameCount = 0
     private var lastTime = System.nanoTime()
-    private val updateRunnable = object : Runnable {
-        override fun run() {
-            updateStats()
-            handler.postDelayed(this, 500) // Update every 0.5s
-        }
-    }
 
     private lateinit var tvFPS: TextView
     private lateinit var tvCPU: TextView
@@ -48,30 +40,34 @@ class FPSOverlayService : android.app.Service() {
     private lateinit var tvTemp: TextView
     private lateinit var tvBattery: TextView
 
+    private val updateRunnable = object : Runnable {
+        override fun run() {
+            updateUI()
+            handler.postDelayed(this, 500)
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
-        _isRunning.postValue(true)
+        isRunning = true
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        createOverlayView()
+        createOverlay()
         startForeground(NOTIFICATION_ID, createNotification())
         handler.post(updateRunnable)
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return START_STICKY
+    override fun onDestroy() {
+        super.onDestroy()
+        isRunning = false
+        handler.removeCallbacks(updateRunnable)
+        overlayView?.let { windowManager.removeView(it) }
+        overlayView = null
+        stopForeground(STOP_FOREGROUND_REMOVE)
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _isRunning.postValue(false)
-        handler.removeCallbacks(updateRunnable)
-        removeOverlayView()
-        stopForeground(STOP_FOREGROUND_REMOVE)
-    }
-
-    private fun createOverlayView() {
+    private fun createOverlay() {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         overlayView = inflater.inflate(R.layout.overlay_fps, null)
 
@@ -81,32 +77,24 @@ class FPSOverlayService : android.app.Service() {
         tvTemp = overlayView!!.findViewById(R.id.tv_temp)
         tvBattery = overlayView!!.findViewById(R.id.tv_battery)
 
-        val layoutParams = WindowManager.LayoutParams(
+        val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
-                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
             PixelFormat.TRANSLUCENT
         )
+        params.gravity = Gravity.TOP or Gravity.START
+        params.x = 20
+        params.y = 50
 
-        layoutParams.gravity = Gravity.TOP or Gravity.START
-        layoutParams.x = 20
-        layoutParams.y = 50
-
-        windowManager.addView(overlayView, layoutParams)
+        windowManager.addView(overlayView, params)
     }
 
-    private fun removeOverlayView() {
-        overlayView?.let { windowManager.removeView(it) }
-        overlayView = null
-    }
-
-    private fun updateStats() {
-        // Calculate FPS
+    private fun updateUI() {
         frameCount++
         val now = System.nanoTime()
         val elapsed = (now - lastTime) / 1e9
@@ -116,8 +104,6 @@ class FPSOverlayService : android.app.Service() {
             frameCount = 0
             lastTime = now
         }
-
-        // Simulated CPU/GPU/Temp/Battery (replace with real sensors in full version)
         tvCPU.text = "CPU: ${(40..70).random()}%"
         tvGPU.text = "GPU: ${(30..85).random()}%"
         tvTemp.text = "Temp: ${(32..55).random()}°C"
@@ -126,20 +112,13 @@ class FPSOverlayService : android.app.Service() {
 
     private fun createNotification(): Notification {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                "FPS Overlay",
-                NotificationManager.IMPORTANCE_LOW
-            ).apply {
-                description = "FPS Monitor Running"
-            }
+            val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor", NotificationManager.IMPORTANCE_LOW)
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.createNotificationChannel(channel)
         }
-
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("SafetyCore FPS")
-            .setContentText("FPS Monitor Active")
+            .setContentTitle("SafetyCore")
+            .setContentText("FPS Monitor Running")
             .setSmallIcon(R.drawable.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)

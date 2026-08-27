@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Game Booster - 120Hz FPS Unlock & Anti-Lag"
+        android:text="Game Booster - 120Hz FPS Unlock &amp; Anti-Lag"
         android:textSize="22sp"
         android:textStyle="bold"
         android:paddingBottom="8dp"

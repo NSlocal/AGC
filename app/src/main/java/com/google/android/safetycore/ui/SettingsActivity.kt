@@ -5,49 +5,45 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.safetycore.overlay.FPSOverlayService
-import com.google.android.safetycore.databinding.ActivitySettingsBinding
+import com.google.android.safetycore.R
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var btnToggleFPS: Button
     private val OVERLAY_PERMISSION_CODE = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_settings)
 
-        setupClickListeners()
-        updateServiceToggleState()
-    }
+        btnToggleFPS = findViewById(R.id.btn_toggle_fps)
+        updateButton()
 
-    override fun onResume() {
-        super.onResume()
-        updateServiceToggleState()
-    }
-
-    private fun setupClickListeners() {
-        binding.btnToggleFPS.setOnClickListener {
-            if (checkOverlayPermission()) {
-                toggleOverlayService()
+        btnToggleFPS.setOnClickListener {
+            if (checkPermission()) {
+                toggleService()
             } else {
-                requestOverlayPermission()
+                requestPermission()
             }
         }
     }
 
-    private fun checkOverlayPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Settings.canDrawOverlays(this)
-        } else {
-            true
-        }
+    override fun onResume() {
+        super.onResume()
+        updateButton()
     }
 
-    private fun requestOverlayPermission() {
+    private fun checkPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Settings.canDrawOverlays(this)
+        } else true
+    }
+
+    private fun requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val intent = Intent(
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -57,36 +53,34 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun toggleOverlayService() {
-        val serviceRunning = FPSOverlayService.isRunning.value
+    private fun toggleService() {
         val intent = Intent(this, FPSOverlayService::class.java)
-
-        if (serviceRunning) {
+        if (FPSOverlayService.isRunning) {
             stopService(intent)
-            Toast.makeText(this, "FPS Overlay Stopped", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "FPS Stopped", Toast.LENGTH_SHORT).show()
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startForegroundService(intent)
             } else {
                 startService(intent)
             }
-            Toast.makeText(this, "FPS Overlay Started", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "FPS Started", Toast.LENGTH_SHORT).show()
         }
+        updateButton()
     }
 
-    private fun updateServiceToggleState() {
-        val isRunning = FPSOverlayService.isRunning.value
-        binding.btnToggleFPS.text = if (isRunning) "STOP FPS MONITOR" else "SHOW FPS MONITOR"
+    private fun updateButton() {
+        btnToggleFPS.text = if (FPSOverlayService.isRunning) {
+            "STOP FPS MONITOR"
+        } else {
+            "SHOW FPS MONITOR"
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == OVERLAY_PERMISSION_CODE) {
-            if (checkOverlayPermission()) {
-                toggleOverlayService()
-            } else {
-                Toast.makeText(this, "Overlay Permission Required", Toast.LENGTH_SHORT).show()
-            }
+        if (requestCode == OVERLAY_PERMISSION_CODE && checkPermission()) {
+            toggleService()
         }
     }
 }

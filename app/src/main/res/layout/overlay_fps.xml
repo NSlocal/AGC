@@ -4,10 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#CC000000"
-    android:padding="8dp"
-    android:elevation="100dp">
+    android:padding="8dp">
 
-    <!-- FPS — GREEN -->
     <TextView
         android:id="@+id/tv_fps"
         android:layout_width="wrap_content"
@@ -17,16 +15,14 @@
         android:textSize="14sp"
         android:textStyle="bold"/>
 
-    <!-- CPU — WHITE -->
     <TextView
         android:id="@+id/tv_cpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CPU: 45%"
+        android:text="CPU: 50%"
         android:textColor="#FFFFFFFF"
         android:textSize="12sp"/>
 
-    <!-- GPU — WHITE -->
     <TextView
         android:id="@+id/tv_gpu"
         android:layout_width="wrap_content"
@@ -35,7 +31,6 @@
         android:textColor="#FFFFFFFF"
         android:textSize="12sp"/>
 
-    <!-- TEMP — RED -->
     <TextView
         android:id="@+id/tv_temp"
         android:layout_width="wrap_content"
@@ -44,7 +39,6 @@
         android:textColor="#FFFF0000"
         android:textSize="12sp"/>
 
-    <!-- BATTERY — ORANGE/WHITE -->
     <TextView
         android:id="@+id/tv_battery"
         android:layout_width="wrap_content"

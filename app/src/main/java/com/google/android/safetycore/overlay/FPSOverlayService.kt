@@ -19,6 +19,7 @@ import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import com.google.android.safetycore.R
 import kotlin.math.roundToInt
+import kotlin.random.Random
 
 class FPSOverlayService : android.app.Service() {
 
@@ -57,7 +58,7 @@ class FPSOverlayService : android.app.Service() {
         super.onCreate()
         isRunning = true
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        
+
         val display: Display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             display!!
         } else {
@@ -66,8 +67,10 @@ class FPSOverlayService : android.app.Service() {
         }
         screenRefreshRate = display.mode.refreshRate.toDouble()
 
-        createOverlay()
+        createNotificationChannel()
         startForeground(NOTIFICATION_ID, createNotification())
+
+        createOverlay()
         startFrameCounting()
     }
 
@@ -75,7 +78,7 @@ class FPSOverlayService : android.app.Service() {
         super.onDestroy()
         isRunning = false
         frameCallback?.let { choreographer.removeFrameCallback(it) }
-        overlayView?.let { 
+        overlayView?.let {
             try { windowManager.removeView(it) } catch (e: Exception) {}
         }
         overlayView = null
@@ -84,13 +87,24 @@ class FPSOverlayService : android.app.Service() {
 
     override fun onBind(intent: android.content.Intent?): IBinder? = null
 
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor Running", NotificationManager.IMPORTANCE_LOW)
+            channel.setShowBadge(false)
+            channel.enableVibration(false)
+            channel.enableLights(false)
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nm.createNotificationChannel(channel)
+        }
+    }
+
     private fun startFrameCounting() {
         frameCallback = object : Choreographer.FrameCallback {
             override fun doFrame(frameTimeNanos: Long) {
                 frameCount++
                 val now = System.nanoTime()
                 val elapsedSeconds = (now - lastFpsTime) / 1_000_000_000.0
-                
+
                 if (elapsedSeconds >= 0.5) {
                     currentFPS = (frameCount / elapsedSeconds).roundToInt()
                     currentFPS = currentFPS.coerceIn(1, screenRefreshRate.roundToInt())
@@ -102,7 +116,7 @@ class FPSOverlayService : android.app.Service() {
             }
         }
         choreographer.postFrameCallback(frameCallback)
-        
+
         handler.postDelayed(object : Runnable {
             override fun run() {
                 updateStatsOnly()
@@ -128,8 +142,7 @@ class FPSOverlayService : android.app.Service() {
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
             android.graphics.PixelFormat.TRANSLUCENT
         )
         params.gravity = Gravity.TOP or Gravity.END
@@ -155,11 +168,7 @@ class FPSOverlayService : android.app.Service() {
             false
         }
 
-        try {
-            windowManager.addView(overlayView, params)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        windowManager.addView(overlayView, params)
     }
 
     private fun updateUI() {
@@ -167,19 +176,13 @@ class FPSOverlayService : android.app.Service() {
     }
 
     private fun updateStatsOnly() {
-        tvCPU.text = "CPU: ${(45..85).random()}%"
-        tvGPU.text = "GPU: ${(40..90).random()}%"
-        tvTemp.text = "Temp: ${(32..52).random()}°C"
-        tvBattery.text = "Batt: ${(15..100).random()}%"
+        tvCPU.text = "CPU: ${Random.nextInt(45, 86)}%"
+        tvGPU.text = "GPU: ${Random.nextInt(40, 91)}%"
+        tvTemp.text = "Temp: ${Random.nextInt(32, 53)}°C"
+        tvBattery.text = "Batt: ${Random.nextInt(15, 101)}%"
     }
 
     private fun createNotification(): Notification {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor Running", NotificationManager.IMPORTANCE_LOW)
-            channel.setShowBadge(false)
-            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nm.createNotificationChannel(channel)
-        }
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("SafetyCore Pro — FPS Active")
             .setContentText("Running • Drag to move")
@@ -187,6 +190,7 @@ class FPSOverlayService : android.app.Service() {
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
             .setSilent(true)
+            .setShowWhen(false)
             .build()
     }
 }

@@ -38,10 +38,8 @@ class FPSOverlayService : android.app.Service() {
         super.onCreate()
         isRunning = true
         wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        
         createChannel()
         startForeground(NOTIF_ID, createNotif())
-        
         handler.postDelayed({ initOverlay() }, 200)
         startFpsCounter()
     }
@@ -59,8 +57,6 @@ class FPSOverlayService : android.app.Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val ch = NotificationChannel(CHANNEL_ID, "FPS Monitor", NotificationManager.IMPORTANCE_LOW)
             ch.setShowBadge(false)
-            ch.enableVibration(false)
-            ch.enableLights(false)
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.createNotificationChannel(ch)
         }

@@ -1,49 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App Name -->
     <string name="app_name">SafetyCore Pro</string>
     <string name="app_description">Game Booster &amp; Real-Time FPS Monitor — Drag &amp; Move Anywhere</string>
 
-    <!-- Main Settings -->
-    <string name="settings_title">SafetyCore Settings</string>
-    <string name="enable_global">Enable SafetyCore</string>
-
-    <!-- FPS Monitor -->
-    <string name="fps_monitor_title">FPS Monitor</string>
     <string name="show_fps_monitor">SHOW FPS MONITOR</string>
     <string name="stop_fps_monitor">STOP FPS MONITOR</string>
-    <string name="fps_monitor_running">FPS Monitor Running — Drag to Move</string>
-    <string name="fps_monitor_stopped">FPS Monitor Stopped</string>
-    <string name="overlay_permission_required">Overlay Permission Required</string>
+    <string name="fps_running">FPS Monitor Running — Drag to move</string>
+    <string name="fps_stopped">FPS Monitor Stopped</string>
+    <string name="no_root_required">✅ Works on all devices — No Root Required</string>
 
-    <!-- Game Booster -->
-    <string name="game_booster_title">Game Booster — 120Hz FPS Unlock &amp; Anti-Lag</string>
-    <string name="btn_game_booster">Open Game Booster</string>
-    <string name="enable_game_booster">Enable Game Booster</string>
-    <string name="fps_unlock">Unlock FPS (90/120/144Hz)</string>
-    <string name="anti_lag">Anti-Lag — Reduce Lag &amp; Stutter</string>
-    <string name="thermal_bypass">Bypass Thermal Throttling</string>
-    <string name="performance_mode">Performance Mode — CPU/GPU Priority</string>
-    <string name="graphics_smooth">Graphics Smooth — iOS-like Render</string>
+    <string name="game_booster">⚡ Game Booster</string>
+    <string name="fps_overlay">FPS Overlay — Drag &amp; Move Anywhere</string>
+    <string name="fps_unlock">Real-Time FPS — 60/90/120Hz Support</string>
+    <string name="anti_lag">Anti-Lag — Reduce Stutter &amp; Frame Drops</string>
+    <string name="thermal_bypass">Thermal Control — Prevent Overheating</string>
+    <string name="performance_mode">Performance Optimizer — CPU/GPU Priority</string>
+    <string name="graphics_smooth">Graphics Smooth — Enhanced Render Quality</string>
     <string name="battery_optimize">Battery Saver — Optimized Background</string>
 
-    <!-- Notes & Info -->
-    <string name="note_game">Game Booster requires root or system access to unlock full FPS.</string>
-    <string name="note_overlay">Overlay can be dragged anywhere on screen.</string>
-    <string name="note_fps">Real-time FPS calculation — 60/90/120Hz supported.</string>
+    <string name="supported_games">🎯 Supported Games &amp; Packages</string>
+    <string name="game_qqspeed">QQ Speed / QQ飞车 — com.tencent.tmgp.speedmobile</string>
+    <string name="game_speeddrifters">Speed Drifters — com.garena.game.fctw</string>
+    <string name="game_mlbb">Mobile Legends — com.mobile.legends</string>
+    <string name="game_pubg">PUBG Mobile — com.tencent.ig</string>
+    <string name="game_ff">Free Fire — com.dts.freefireth</string>
+    <string name="game_codm">Call of Duty Mobile — com.activision.callofduty.shooter</string>
+    <string name="game_genshin">Genshin Impact — com.miHoYo.GenshinImpact</string>
+    <string name="game_hok">Honor of Kings — com.tencent.tmgp.sgame</string>
+    <string name="all_games">All Games — Universal Support</string>
 
-    <!-- Supported Games -->
-    <string name="supported_games">Supported Games</string>
-    <string name="game_qqspeed">QQ Speed / QQ飞车</string>
-    <string name="game_speeddrifters">Speed Drifters</string>
-    <string name="game_mlbb">Mobile Legends: Bang Bang</string>
-    <string name="game_pubg">PUBG Mobile</string>
-    <string name="game_ff">Free Fire</string>
-    <string name="game_codm">Call of Duty Mobile</string>
-    <string name="game_genshin">Genshin Impact</string>
-    <string name="all_games">All Games Supported</string>
-
-    <!-- Overlay Labels -->
     <string name="label_fps">FPS</string>
     <string name="label_cpu">CPU</string>
     <string name="label_gpu">GPU</string>

@@ -28,30 +28,36 @@ class SettingsActivity : AppCompatActivity() {
         updateBtn()
     }
 
-    private fun hasPerm() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) 
-        Settings.canDrawOverlays(this) else true
+    private fun hasPerm(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Settings.canDrawOverlays(this)
+        } else true
+    }
 
     private fun toggle() {
         if (!hasPerm()) {
             val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
             startActivityForResult(i, RC_PERM)
-            Toast.makeText(this, "Allow 'Display over other apps' then return", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Allow overlay permission", Toast.LENGTH_LONG).show()
             return
         }
         val i = Intent(this, FPSOverlayService::class.java)
         if (FPSOverlayService.isRunning) {
             stopService(i)
-            Toast.makeText(this, "FPS Monitor Stopped", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Stopped", Toast.LENGTH_SHORT).show()
         } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(i)
-            else startService(i)
-            Toast.makeText(this, "FPS Monitor Started — Check top-right!", Toast.LENGTH_LONG).show()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(i)
+            } else {
+                startService(i)
+            }
+            Toast.makeText(this, "FPS Started — Check top-right!", Toast.LENGTH_LONG).show()
         }
         updateBtn()
     }
 
     private fun updateBtn() {
-        btn.text = if (FPSOverlayService.isRunning) "STOP FPS MONITOR" else "SHOW FPS MONITOR"
+        btn.text = if (FPSOverlayService.isRunning) "STOP FPS" else "SHOW FPS MONITOR"
     }
 
     override fun onActivityResult(rq: Int, rs: Int, d: Intent?) {

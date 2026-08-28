@@ -29,7 +29,7 @@ class FPSOverlayService : android.app.Service() {
         private const val CHANNEL_ID = "FPS_Overlay"
         var currentFPS = 0
             private set
-        var screenRefreshRate = 60.0 // Auto-detected
+        var screenRefreshRate = 60.0
     }
 
     private lateinit var windowManager: WindowManager
@@ -44,14 +44,12 @@ class FPSOverlayService : android.app.Service() {
     private lateinit var tvTemp: TextView
     private lateinit var tvBattery: TextView
 
-    // DRAG VARIABLES — FIXED
     private var initialX = 0
     private var initialY = 0
     private var initialTouchX = 0f
     private var initialTouchY = 0f
     private lateinit var params: WindowManager.LayoutParams
 
-    // FPS CALCULATION — FIXED
     private var frameCount = 0
     private var lastFpsTime = System.nanoTime()
 
@@ -60,21 +58,16 @@ class FPSOverlayService : android.app.Service() {
         isRunning = true
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         
-        // ✅ DETECT REAL SCREEN REFRESH RATE (60/90/120/144Hz)
         val display: Display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             display!!
         } else {
             @Suppress("DEPRECATION")
             windowManager.defaultDisplay
         }
-        val mode = display.mode
-        screenRefreshRate = mode.refreshRate.toDouble()
-        android.util.Log.d("FPSOverlay", "Detected refresh rate: $screenRefreshRate Hz")
+        screenRefreshRate = display.mode.refreshRate.toDouble()
 
         createOverlay()
         startForeground(NOTIFICATION_ID, createNotification())
-        
-        // ✅ USE CHOREOGRAPHER — COUNT ACTUAL FRAMES!
         startFrameCounting()
     }
 
@@ -89,34 +82,25 @@ class FPSOverlayService : android.app.Service() {
 
     override fun onBind(intent: android.content.Intent?): IBinder? = null
 
-    // ✅ FIXED: COUNT REAL FRAMES FROM SYSTEM
     private fun startFrameCounting() {
         frameCallback = object : Choreographer.FrameCallback {
             override fun doFrame(frameTimeNanos: Long) {
                 frameCount++
-                
-                // Calculate FPS every 0.5s
                 val now = System.nanoTime()
                 val elapsedSeconds = (now - lastFpsTime) / 1_000_000_000.0
                 
                 if (elapsedSeconds >= 0.5) {
                     currentFPS = (frameCount / elapsedSeconds).roundToInt()
-                    // Cap at detected refresh rate
                     currentFPS = currentFPS.coerceIn(1, screenRefreshRate.roundToInt())
                     frameCount = 0
                     lastFpsTime = now
-                    
-                    // Update UI
                     updateUI()
                 }
-                
-                // Register next frame
                 choreographer.postFrameCallback(this)
             }
         }
         choreographer.postFrameCallback(frameCallback)
         
-        // Also update other stats every 300ms
         handler.postDelayed(object : Runnable {
             override fun run() {
                 updateStatsOnly()
@@ -135,14 +119,12 @@ class FPSOverlayService : android.app.Service() {
         tvTemp = overlayView!!.findViewById(R.id.tv_temp)
         tvBattery = overlayView!!.findViewById(R.id.tv_battery)
 
-        // ✅ FIXED: REMOVE FLAG THAT BLOCKS TOUCH!
         params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
-            // ❌ FLAG_NOT_FOCUSABLE removed — IT BLOCKS TOUCH!
             WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
             android.graphics.PixelFormat.TRANSLUCENT
         )
@@ -150,7 +132,6 @@ class FPSOverlayService : android.app.Service() {
         params.x = 20
         params.y = 50
 
-        // ✅ FIXED: DRAG & MOVE — IMPROVED TOUCH HANDLING
         overlayView!!.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -158,16 +139,12 @@ class FPSOverlayService : android.app.Service() {
                     initialY = params.y
                     initialTouchX = event.rawX
                     initialTouchY = event.rawY
-                    android.util.Log.d("FPSOverlay", "Touch start — dragging enabled")
                     return@setOnTouchListener true
                 }
                 MotionEvent.ACTION_MOVE -> {
                     params.x = initialX + (event.rawX - initialTouchX).toInt()
                     params.y = initialY + (event.rawY - initialTouchY).toInt()
                     windowManager.updateViewLayout(overlayView, params)
-                    return@setOnTouchListener true
-                }
-                MotionEvent.ACTION_UP -> {
                     return@setOnTouchListener true
                 }
             }
@@ -197,12 +174,11 @@ class FPSOverlayService : android.app.Service() {
         }
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("SafetyCore Pro — FPS Active")
-            .setContentText("Running • Drag to move • ${screenRefreshRate.roundToInt()}Hz detected")
+            .setContentText("Running • Drag to move • ${screenRefreshRate.roundToInt()}Hz")
             .setSmallIcon(R.drawable.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
             .setSilent(true)
-            .setShowWhen(false)
             .build()
     }
 }

@@ -16,17 +16,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnToggleFPS: Button
     private val OVERLAY_PERMISSION_CODE = 1001
 
-    // 🎯 DAFTAR GAME YANG DIDUKUNG
-    private val supportedGames = listOf(
-        GameApp("QQ Speed / QQ飞车", "com.tencent.tmgp.speedmobile"),
-        GameApp("Speed Drifters", "com.garena.game.fctw"),
-        GameApp("PUBG Mobile", "com.tencent.ig"),
-        GameApp("Mobile Legends", "com.mobile.legends"),
-        GameApp("Free Fire", "com.dts.freefireth"),
-        GameApp("Call of Duty Mobile", "com.activision.callofduty.shooter"),
-        GameApp("Genshin Impact", "com.miHoYo.GenshinImpact")
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -94,7 +83,4 @@ class SettingsActivity : AppCompatActivity() {
             toggleService()
         }
     }
-
-    // 🎯 DATA CLASS GAME
-    data class GameApp(val name: String, val packageName: String)
 }

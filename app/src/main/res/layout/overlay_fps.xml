@@ -12,39 +12,7 @@
         android:layout_height="wrap_content"
         android:text="FPS: 60"
         android:textColor="#FF00FF00"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/tv_cpu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CPU: 50%"
-        android:textColor="#FFFFFFFF"
-        android:textSize="12sp"/>
-
-    <TextView
-        android:id="@+id/tv_gpu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GPU: 60%"
-        android:textColor="#FFFFFFFF"
-        android:textSize="12sp"/>
-
-    <TextView
-        android:id="@+id/tv_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Temp: 38°C"
-        android:textColor="#FFFF0000"
-        android:textSize="12sp"/>
-
-    <TextView
-        android:id="@+id/tv_battery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Batt: 85%"
-        android:textColor="#FFFFFF00"
-        android:textSize="12sp"/>
 
 </LinearLayout>

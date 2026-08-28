@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SafetyCore Pro</string>
-    <string name="show_fps_monitor">SHOW FPS MONITOR</string>
-    <string name="stop_fps_monitor">STOP FPS MONITOR</string>
 </resources>

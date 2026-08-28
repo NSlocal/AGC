@@ -50,23 +50,28 @@ class SettingsActivity : AppCompatActivity() {
                 Uri.parse("package:$packageName")
             )
             startActivityForResult(intent, OVERLAY_PERMISSION_CODE)
+            Toast.makeText(this, "Allow 'Display over other apps' then return", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun toggleService() {
-        val intent = Intent(this, FPSOverlayService::class.java)
-        if (FPSOverlayService.isRunning) {
-            stopService(intent)
-            Toast.makeText(this, "FPS Monitor Stopped", Toast.LENGTH_SHORT).show()
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(intent)
+        try {
+            val intent = Intent(this, FPSOverlayService::class.java)
+            if (FPSOverlayService.isRunning) {
+                stopService(intent)
+                Toast.makeText(this, "FPS Monitor Stopped", Toast.LENGTH_SHORT).show()
             } else {
-                startService(intent)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(intent)
+                } else {
+                    startService(intent)
+                }
+                Toast.makeText(this, "FPS Monitor Started — Check top-right!", Toast.LENGTH_LONG).show()
             }
-            Toast.makeText(this, "FPS Monitor Started — Drag to move!", Toast.LENGTH_SHORT).show()
+            updateButton()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
         }
-        updateButton()
     }
 
     private fun updateButton() {
@@ -79,8 +84,12 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == OVERLAY_PERMISSION_CODE && checkPermission()) {
-            toggleService()
+        if (requestCode == OVERLAY_PERMISSION_CODE) {
+            if (checkPermission()) {
+                toggleService()
+            } else {
+                Toast.makeText(this, "Permission denied — cannot show FPS", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }

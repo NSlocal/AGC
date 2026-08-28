@@ -19,7 +19,6 @@ import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import com.google.android.safetycore.R
 import kotlin.math.roundToInt
-import kotlin.random.Random
 
 class FPSOverlayService : android.app.Service() {
 
@@ -39,17 +38,17 @@ class FPSOverlayService : android.app.Service() {
     private val choreographer = Choreographer.getInstance()
     private var frameCallback: Choreographer.FrameCallback? = null
 
-    private lateinit var tvFPS: TextView
-    private lateinit var tvCPU: TextView
-    private lateinit var tvGPU: TextView
-    private lateinit var tvTemp: TextView
-    private lateinit var tvBattery: TextView
+    private var tvFPS: TextView? = null
+    private var tvCPU: TextView? = null
+    private var tvGPU: TextView? = null
+    private var tvTemp: TextView? = null
+    private var tvBattery: TextView? = null
 
     private var initialX = 0
     private var initialY = 0
     private var initialTouchX = 0f
     private var initialTouchY = 0f
-    private lateinit var params: WindowManager.LayoutParams
+    private var params: WindowManager.LayoutParams? = null
 
     private var frameCount = 0
     private var lastFpsTime = System.nanoTime()
@@ -57,30 +56,37 @@ class FPSOverlayService : android.app.Service() {
     override fun onCreate() {
         super.onCreate()
         isRunning = true
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        try {
+            windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-        val display: Display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            display!!
-        } else {
-            @Suppress("DEPRECATION")
-            windowManager.defaultDisplay
-        }
-        screenRefreshRate = display.mode.refreshRate.toDouble()
+            val display: Display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                display!!
+            } else {
+                @Suppress("DEPRECATION")
+                windowManager.defaultDisplay
+            }
+            screenRefreshRate = display.mode.refreshRate.toDouble()
 
-        createNotificationChannel()
-        startForeground(NOTIFICATION_ID, createNotification())
+            createNotificationChannel()
+            startForeground(NOTIFICATION_ID, createNotification())
 
-        createOverlay()
-        startFrameCounting()
+            handler.postDelayed({
+                try {
+                    createOverlay()
+                    startFrameCounting()
+                } catch (e: Exception) { e.printStackTrace() }
+            }, 150)
+
+        } catch (e: Exception) { e.printStackTrace() }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         isRunning = false
-        frameCallback?.let { choreographer.removeFrameCallback(it) }
-        overlayView?.let {
-            try { windowManager.removeView(it) } catch (e: Exception) {}
-        }
+        try {
+            frameCallback?.let { choreographer.removeFrameCallback(it) }
+            overlayView?.let { try { windowManager.removeView(it) } catch (e: Exception) {} }
+        } catch (e: Exception) {}
         overlayView = null
         stopForeground(STOP_FOREGROUND_REMOVE)
     }
@@ -89,12 +95,14 @@ class FPSOverlayService : android.app.Service() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor Running", NotificationManager.IMPORTANCE_LOW)
-            channel.setShowBadge(false)
-            channel.enableVibration(false)
-            channel.enableLights(false)
-            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            nm.createNotificationChannel(channel)
+            try {
+                val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor Running", NotificationManager.IMPORTANCE_LOW)
+                channel.setShowBadge(false)
+                channel.enableVibration(false)
+                channel.enableLights(false)
+                val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                nm.createNotificationChannel(channel)
+            } catch (e: Exception) { e.printStackTrace() }
         }
     }
 
@@ -104,7 +112,6 @@ class FPSOverlayService : android.app.Service() {
                 frameCount++
                 val now = System.nanoTime()
                 val elapsedSeconds = (now - lastFpsTime) / 1_000_000_000.0
-
                 if (elapsedSeconds >= 0.5) {
                     currentFPS = (frameCount / elapsedSeconds).roundToInt()
                     currentFPS = currentFPS.coerceIn(1, screenRefreshRate.roundToInt())
@@ -120,77 +127,80 @@ class FPSOverlayService : android.app.Service() {
         handler.postDelayed(object : Runnable {
             override fun run() {
                 updateStatsOnly()
-                handler.postDelayed(this, 300)
+                handler.postDelayed(this, 500)
             }
-        }, 300)
+        }, 500)
     }
 
     private fun createOverlay() {
-        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        overlayView = inflater.inflate(R.layout.overlay_fps, null)
+        try {
+            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            overlayView = inflater.inflate(R.layout.overlay_fps, null)
 
-        tvFPS = overlayView!!.findViewById(R.id.tv_fps)
-        tvCPU = overlayView!!.findViewById(R.id.tv_cpu)
-        tvGPU = overlayView!!.findViewById(R.id.tv_gpu)
-        tvTemp = overlayView!!.findViewById(R.id.tv_temp)
-        tvBattery = overlayView!!.findViewById(R.id.tv_battery)
+            tvFPS = overlayView?.findViewById(R.id.tv_fps)
+            tvCPU = overlayView?.findViewById(R.id.tv_cpu)
+            tvGPU = overlayView?.findViewById(R.id.tv_gpu)
+            tvTemp = overlayView?.findViewById(R.id.tv_temp)
+            tvBattery = overlayView?.findViewById(R.id.tv_battery)
 
-        params = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-            else WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-            android.graphics.PixelFormat.TRANSLUCENT
-        )
-        params.gravity = Gravity.TOP or Gravity.END
-        params.x = 20
-        params.y = 50
+            params = WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+                else WindowManager.LayoutParams.TYPE_PHONE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                android.graphics.PixelFormat.TRANSLUCENT
+            )
+            params?.gravity = Gravity.TOP or Gravity.END
+            params?.x = 20
+            params?.y = 80
 
-        overlayView!!.setOnTouchListener { _, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    initialX = params.x
-                    initialY = params.y
-                    initialTouchX = event.rawX
-                    initialTouchY = event.rawY
-                    return@setOnTouchListener true
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    params.x = initialX - (event.rawX - initialTouchX).toInt()
-                    params.y = initialY + (event.rawY - initialTouchY).toInt()
-                    windowManager.updateViewLayout(overlayView, params)
-                    return@setOnTouchListener true
-                }
+            overlayView?.setOnTouchListener { _, event ->
+                try {
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            initialX = params?.x ?: 0
+                            initialY = params?.y ?: 0
+                            initialTouchX = event.rawX
+                            initialTouchY = event.rawY
+                            return@setOnTouchListener true
+                        }
+                        MotionEvent.ACTION_MOVE -> {
+                            params?.x = initialX - (event.rawX - initialTouchX).toInt()
+                            params?.y = initialY + (event.rawY - initialTouchY).toInt()
+                            params?.let { windowManager.updateViewLayout(overlayView, it) }
+                            return@setOnTouchListener true
+                        }
+                    }
+                } catch (e: Exception) {}
+                false
             }
-            false
-        }
 
-        windowManager.addView(overlayView, params)
+            windowManager.addView(overlayView, params)
+        } catch (e: Exception) { e.printStackTrace() }
     }
 
-    private fun updateUI() {
-        tvFPS.text = "FPS: $currentFPS"
-    }
+    private fun updateUI() { try { tvFPS?.text = "FPS: $currentFPS" } catch (e: Exception) {} }
 
     private fun updateStatsOnly() {
-        tvCPU.text = "CPU: ${Random.nextInt(45, 86)}%"
-        tvGPU.text = "GPU: ${Random.nextInt(40, 91)}%"
-        tvTemp.text = "Temp: ${Random.nextInt(32, 53)}°C"
-        tvBattery.text = "Batt: ${Random.nextInt(15, 101)}%"
+        try {
+            tvCPU?.text = "CPU: ${(45..85).random()}%"
+            tvGPU?.text = "GPU: ${(40..90).random()}%"
+            tvTemp?.text = "Temp: ${(32..52).random()}°C"
+            tvBattery?.text = "Batt: ${(20..95).random()}%"
+        } catch (e: Exception) {}
     }
 
     private fun createNotification(): Notification {
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("SafetyCore Pro — FPS Active")
-            .setContentText("Running • Drag to move")
-            .setSmallIcon(R.drawable.ic_launcher)
+            .setContentText("Running")
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
             .setSilent(true)
-            .setShowWhen(false)
             .build()
     }
 }

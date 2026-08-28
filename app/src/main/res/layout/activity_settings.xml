@@ -1,192 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    android:padding="20dp">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:text="SafetyCore Pro"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#6200EE"
+        android:padding="10dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SafetyCore Pro"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="#6200EE"
-            android:padding="10dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Game Booster &amp; Real-Time FPS Monitor"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="#757575"
+        android:layout_marginBottom="25dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Game Booster &amp; Real-Time FPS Monitor"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:textColor="#757575"
-            android:layout_marginBottom="25dp"/>
+    <Button
+        android:id="@+id/btn_toggle_fps"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="SHOW FPS MONITOR"
+        android:background="#6200EE"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:layout_marginBottom="25dp"/>
 
-        <Button
-            android:id="@+id/btn_toggle_fps"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="SHOW FPS MONITOR"
-            android:background="#6200EE"
-            android:textColor="#FFFFFF"
-            android:textSize="17sp"
-            android:layout_marginBottom="25dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Works on all devices — No Root Required"
+        android:textSize="14sp"
+        android:padding="10dp"
+        android:background="#E8F5E9"
+        android:textColor="#2E7D32"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Game Booster"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
-            android:layout_marginBottom="15dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Works on all devices — No Root Required"
-            android:textSize="13sp"
-            android:padding="10dp"
-            android:background="#E8F5E9"
-            android:textColor="#2E7D32"
-            android:layout_marginBottom="15dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#FFFFFF"
-            android:padding="15dp"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="FPS Overlay — Drag &amp; Move Anywhere"
-                android:textSize="15sp"
-                android:paddingVertical="10dp"
-                android:textColor="#4CAF50"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Real-Time FPS — 60/90/120Hz Support"
-                android:textSize="15sp"
-                android:paddingVertical="10dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Anti-Lag — Reduce Stutter &amp; Frame Drops"
-                android:textSize="15sp"
-                android:paddingVertical="10dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Performance Optimizer — CPU/GPU Priority"
-                android:textSize="15sp"
-                android:paddingVertical="10dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Graphics Smooth — Enhanced Render Quality"
-                android:textSize="15sp"
-                android:paddingVertical="10dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Battery Saver — Optimized Background Service"
-                android:textSize="15sp"
-                android:paddingVertical="10dp"
-                android:textColor="#333333"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Supported Games &amp; Packages"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
-            android:layout_marginBottom="15dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#FFFFFF"
-            android:padding="15dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="QQ Speed / QQ飞车\ncom.tencent.tmgp.speedmobile"
-                android:textSize="14sp"
-                android:paddingVertical="8dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Speed Drifters\ncom.garena.game.fctw"
-                android:textSize="14sp"
-                android:paddingVertical="8dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mobile Legends\ncom.mobile.legends"
-                android:textSize="14sp"
-                android:paddingVertical="8dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="PUBG Mobile\ncom.tencent.ig"
-                android:textSize="14sp"
-                android:paddingVertical="8dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Free Fire\ncom.dts.freefireth"
-                android:textSize="14sp"
-                android:paddingVertical="8dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Call of Duty Mobile\ncom.activision.callofduty.shooter"
-                android:textSize="14sp"
-                android:paddingVertical="8dp"
-                android:textColor="#333333"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All Other Games — Universal Support"
-                android:textSize="14sp"
-                android:paddingVertical="12dp"
-                android:textColor="#6200EE"
-                android:textStyle="bold"/>
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

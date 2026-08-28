@@ -9,7 +9,6 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.view.Choreographer
-import android.view.Display
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -21,186 +20,118 @@ import com.google.android.safetycore.R
 import kotlin.math.roundToInt
 
 class FPSOverlayService : android.app.Service() {
-
     companion object {
         var isRunning = false
             private set
-        private const val NOTIFICATION_ID = 1001
-        private const val CHANNEL_ID = "FPS_Overlay"
-        var currentFPS = 0
-            private set
-        var screenRefreshRate = 60.0
+        private const val NOTIF_ID = 1001
+        private const val CHANNEL_ID = "fps_channel"
     }
 
-    private lateinit var windowManager: WindowManager
-    private var overlayView: View? = null
+    private lateinit var wm: WindowManager
+    private var view: View? = null
     private val handler = Handler(Looper.getMainLooper())
-    private val choreographer = Choreographer.getInstance()
-    private var frameCallback: Choreographer.FrameCallback? = null
-
-    private var tvFPS: TextView? = null
-    private var tvCPU: TextView? = null
-    private var tvGPU: TextView? = null
-    private var tvTemp: TextView? = null
-    private var tvBattery: TextView? = null
-
-    private var initialX = 0
-    private var initialY = 0
-    private var initialTouchX = 0f
-    private var initialTouchY = 0f
-    private var params: WindowManager.LayoutParams? = null
-
+    private var fpsTv: TextView? = null
     private var frameCount = 0
-    private var lastFpsTime = System.nanoTime()
+    private var lastTime = System.nanoTime()
 
     override fun onCreate() {
         super.onCreate()
         isRunning = true
-        try {
-            windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
-            val display: Display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                display!!
-            } else {
-                @Suppress("DEPRECATION")
-                windowManager.defaultDisplay
-            }
-            screenRefreshRate = display.mode.refreshRate.toDouble()
-
-            createNotificationChannel()
-            startForeground(NOTIFICATION_ID, createNotification())
-
-            handler.postDelayed({
-                try {
-                    createOverlay()
-                    startFrameCounting()
-                } catch (e: Exception) { e.printStackTrace() }
-            }, 150)
-
-        } catch (e: Exception) { e.printStackTrace() }
+        wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        
+        createChannel()
+        startForeground(NOTIF_ID, createNotif())
+        
+        handler.postDelayed({ initOverlay() }, 200)
+        startFpsCounter()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         isRunning = false
-        try {
-            frameCallback?.let { choreographer.removeFrameCallback(it) }
-            overlayView?.let { try { windowManager.removeView(it) } catch (e: Exception) {} }
-        } catch (e: Exception) {}
-        overlayView = null
-        stopForeground(STOP_FOREGROUND_REMOVE)
+        try { view?.let { wm.removeView(it) } } catch (_: Exception) {}
+        view = null
     }
 
     override fun onBind(intent: android.content.Intent?): IBinder? = null
 
-    private fun createNotificationChannel() {
+    private fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            try {
-                val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor Running", NotificationManager.IMPORTANCE_LOW)
-                channel.setShowBadge(false)
-                channel.enableVibration(false)
-                channel.enableLights(false)
-                val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                nm.createNotificationChannel(channel)
-            } catch (e: Exception) { e.printStackTrace() }
+            val ch = NotificationChannel(CHANNEL_ID, "FPS Monitor", NotificationManager.IMPORTANCE_LOW)
+            ch.setShowBadge(false)
+            ch.enableVibration(false)
+            ch.enableLights(false)
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nm.createNotificationChannel(ch)
         }
     }
 
-    private fun startFrameCounting() {
-        frameCallback = object : Choreographer.FrameCallback {
-            override fun doFrame(frameTimeNanos: Long) {
-                frameCount++
-                val now = System.nanoTime()
-                val elapsedSeconds = (now - lastFpsTime) / 1_000_000_000.0
-                if (elapsedSeconds >= 0.5) {
-                    currentFPS = (frameCount / elapsedSeconds).roundToInt()
-                    currentFPS = currentFPS.coerceIn(1, screenRefreshRate.roundToInt())
-                    frameCount = 0
-                    lastFpsTime = now
-                    updateUI()
-                }
-                choreographer.postFrameCallback(this)
-            }
-        }
-        choreographer.postFrameCallback(frameCallback)
-
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                updateStatsOnly()
-                handler.postDelayed(this, 500)
-            }
-        }, 500)
+    private fun createNotif(): Notification {
+        return NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle("SafetyCore Pro")
+            .setContentText("FPS Running")
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setOngoing(true)
+            .setSilent(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .build()
     }
 
-    private fun createOverlay() {
+    private fun initOverlay() {
         try {
-            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            overlayView = inflater.inflate(R.layout.overlay_fps, null)
+            val inf = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            view = inf.inflate(R.layout.overlay_fps, null)
+            fpsTv = view?.findViewById(R.id.tv_fps)
 
-            tvFPS = overlayView?.findViewById(R.id.tv_fps)
-            tvCPU = overlayView?.findViewById(R.id.tv_cpu)
-            tvGPU = overlayView?.findViewById(R.id.tv_gpu)
-            tvTemp = overlayView?.findViewById(R.id.tv_temp)
-            tvBattery = overlayView?.findViewById(R.id.tv_battery)
-
-            params = WindowManager.LayoutParams(
+            val lp = WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.WRAP_CONTENT,
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 else WindowManager.LayoutParams.TYPE_PHONE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 android.graphics.PixelFormat.TRANSLUCENT
             )
-            params?.gravity = Gravity.TOP or Gravity.END
-            params?.x = 20
-            params?.y = 80
+            lp.gravity = Gravity.TOP or Gravity.END
+            lp.x = 20
+            lp.y = 80
 
-            overlayView?.setOnTouchListener { _, event ->
-                try {
-                    when (event.action) {
-                        MotionEvent.ACTION_DOWN -> {
-                            initialX = params?.x ?: 0
-                            initialY = params?.y ?: 0
-                            initialTouchX = event.rawX
-                            initialTouchY = event.rawY
-                            return@setOnTouchListener true
-                        }
-                        MotionEvent.ACTION_MOVE -> {
-                            params?.x = initialX - (event.rawX - initialTouchX).toInt()
-                            params?.y = initialY + (event.rawY - initialTouchY).toInt()
-                            params?.let { windowManager.updateViewLayout(overlayView, it) }
-                            return@setOnTouchListener true
-                        }
+            var dx = 0f
+            var dy = 0f
+            view?.setOnTouchListener { _, e ->
+                when (e.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        dx = e.rawX - lp.x
+                        dy = e.rawY - lp.y
                     }
-                } catch (e: Exception) {}
-                false
+                    MotionEvent.ACTION_MOVE -> {
+                        lp.x = (e.rawX - dx).toInt()
+                        lp.y = (e.rawY - dy).toInt()
+                        wm.updateViewLayout(view, lp)
+                    }
+                }
+                true
             }
 
-            windowManager.addView(overlayView, params)
-        } catch (e: Exception) { e.printStackTrace() }
+            wm.addView(view, lp)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
-    private fun updateUI() { try { tvFPS?.text = "FPS: $currentFPS" } catch (e: Exception) {} }
-
-    private fun updateStatsOnly() {
-        try {
-            tvCPU?.text = "CPU: ${(45..85).random()}%"
-            tvGPU?.text = "GPU: ${(40..90).random()}%"
-            tvTemp?.text = "Temp: ${(32..52).random()}°C"
-            tvBattery?.text = "Batt: ${(20..95).random()}%"
-        } catch (e: Exception) {}
-    }
-
-    private fun createNotification(): Notification {
-        return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("SafetyCore Pro — FPS Active")
-            .setContentText("Running")
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .setOngoing(true)
-            .setSilent(true)
-            .build()
+    private fun startFpsCounter() {
+        Choreographer.getInstance().postFrameCallback(object : Choreographer.FrameCallback {
+            override fun doFrame(timeNanos: Long) {
+                frameCount++
+                val sec = (timeNanos - lastTime) / 1e9
+                if (sec >= 0.5) {
+                    val fps = (frameCount / sec).roundToInt()
+                    fpsTv?.text = "FPS: $fps"
+                    frameCount = 0
+                    lastTime = timeNanos
+                }
+                Choreographer.getInstance().postFrameCallback(this)
+            }
+        })
     }
 }

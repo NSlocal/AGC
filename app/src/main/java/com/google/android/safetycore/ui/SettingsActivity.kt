@@ -12,84 +12,50 @@ import com.google.android.safetycore.overlay.FPSOverlayService
 import com.google.android.safetycore.R
 
 class SettingsActivity : AppCompatActivity() {
-
-    private lateinit var btnToggleFPS: Button
-    private val OVERLAY_PERMISSION_CODE = 1001
+    private lateinit var btn: Button
+    private val RC_PERM = 1234
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
-        btnToggleFPS = findViewById(R.id.btn_toggle_fps)
-        updateButton()
-
-        btnToggleFPS.setOnClickListener {
-            if (checkPermission()) {
-                toggleService()
-            } else {
-                requestPermission()
-            }
-        }
+        btn = findViewById(R.id.btn_toggle_fps)
+        updateBtn()
+        btn.setOnClickListener { toggle() }
     }
 
     override fun onResume() {
         super.onResume()
-        updateButton()
+        updateBtn()
     }
 
-    private fun checkPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Settings.canDrawOverlays(this)
-        } else true
-    }
+    private fun hasPerm() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) 
+        Settings.canDrawOverlays(this) else true
 
-    private fun requestPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val intent = Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName")
-            )
-            startActivityForResult(intent, OVERLAY_PERMISSION_CODE)
+    private fun toggle() {
+        if (!hasPerm()) {
+            val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+            startActivityForResult(i, RC_PERM)
             Toast.makeText(this, "Allow 'Display over other apps' then return", Toast.LENGTH_LONG).show()
+            return
         }
-    }
-
-    private fun toggleService() {
-        try {
-            val intent = Intent(this, FPSOverlayService::class.java)
-            if (FPSOverlayService.isRunning) {
-                stopService(intent)
-                Toast.makeText(this, "FPS Monitor Stopped", Toast.LENGTH_SHORT).show()
-            } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    startForegroundService(intent)
-                } else {
-                    startService(intent)
-                }
-                Toast.makeText(this, "FPS Monitor Started — Check top-right!", Toast.LENGTH_LONG).show()
-            }
-            updateButton()
-        } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun updateButton() {
-        btnToggleFPS.text = if (FPSOverlayService.isRunning) {
-            "STOP FPS MONITOR"
+        val i = Intent(this, FPSOverlayService::class.java)
+        if (FPSOverlayService.isRunning) {
+            stopService(i)
+            Toast.makeText(this, "FPS Monitor Stopped", Toast.LENGTH_SHORT).show()
         } else {
-            "SHOW FPS MONITOR"
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(i)
+            else startService(i)
+            Toast.makeText(this, "FPS Monitor Started — Check top-right!", Toast.LENGTH_LONG).show()
         }
+        updateBtn()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == OVERLAY_PERMISSION_CODE) {
-            if (checkPermission()) {
-                toggleService()
-            } else {
-                Toast.makeText(this, "Permission denied — cannot show FPS", Toast.LENGTH_LONG).show()
-            }
-        }
+    private fun updateBtn() {
+        btn.text = if (FPSOverlayService.isRunning) "STOP FPS MONITOR" else "SHOW FPS MONITOR"
+    }
+
+    override fun onActivityResult(rq: Int, rs: Int, d: Intent?) {
+        super.onActivityResult(rq, rs, d)
+        if (rq == RC_PERM && hasPerm()) toggle()
     }
 }

@@ -16,28 +16,6 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnToggleFPS: Button
     private val OVERLAY_PERMISSION_CODE = 1001
 
-    // ✅ FULL SUPPORTED GAMES — WITH PACKAGE NAMES
-    private val supportedGames = listOf(
-        GameApp("QQ Speed / QQ飞车", "com.tencent.tmgp.speedmobile"),
-        GameApp("Speed Drifters", "com.garena.game.fctw"),
-        GameApp("Mobile Legends: Bang Bang", "com.mobile.legends"),
-        GameApp("PUBG Mobile", "com.tencent.ig"),
-        GameApp("PUBG Mobile KR", "com.pubg.krmobile"),
-        GameApp("Free Fire", "com.dts.freefireth"),
-        GameApp("Free Fire MAX", "com.dts.freefiremax"),
-        GameApp("Call of Duty Mobile", "com.activision.callofduty.shooter"),
-        GameApp("Genshin Impact", "com.miHoYo.GenshinImpact"),
-        GameApp("Honor of Kings", "com.tencent.tmgp.sgame"),
-        GameApp("Arena of Valor", "com.ngame.allstar.eu"),
-        GameApp("League of Legends: Wild Rift", "com.riotgames.leagueoflegends.wildrift"),
-        GameApp("Brawl Stars", "com.supercell.brawlstars"),
-        GameApp("Clash of Clans", "com.supercell.clashofclans"),
-        GameApp("Clash Royale", "com.supercell.clashroyale"),
-        GameApp("eFootball 2025", "jp.konami.pesam"),
-        GameApp("Asphalt 9", "com.gameloft.android.ANMP.GloftA9HM"),
-        GameApp("All Other Games", "*")
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -105,6 +83,4 @@ class SettingsActivity : AppCompatActivity() {
             toggleService()
         }
     }
-
-    data class GameApp(val name: String, val packageName: String)
 }

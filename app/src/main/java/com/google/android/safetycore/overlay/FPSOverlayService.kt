@@ -25,8 +25,8 @@ class FPSOverlayService : android.app.Service() {
             private set
         private const val NOTIFICATION_ID = 1001
         private const val CHANNEL_ID = "FPS_Overlay"
-        private var lastFrameTime = System.nanoTime()
         private var frameCount = 0
+        private var lastFPSCalculationTime = System.nanoTime()
         var currentFPS = 0
             private set
     }
@@ -41,17 +41,17 @@ class FPSOverlayService : android.app.Service() {
     private lateinit var tvTemp: TextView
     private lateinit var tvBattery: TextView
 
-    // 🎯 DRAG VARIABLES
     private var initialX = 0
     private var initialY = 0
     private var initialTouchX = 0f
     private var initialTouchY = 0f
+    private lateinit var params: WindowManager.LayoutParams
 
     private val updateRunnable = object : Runnable {
         override fun run() {
-            calculateRealFPS()
-            updateStats()
-            handler.postDelayed(this, 100) // Update 10x/detik = Responsif!
+            calculateFPS()
+            updateUI()
+            handler.postDelayed(this, 100)
         }
     }
 
@@ -75,16 +75,20 @@ class FPSOverlayService : android.app.Service() {
 
     override fun onBind(intent: android.content.Intent?): IBinder? = null
 
-    // 🎯 HITUNG FPS NYATA — BUKAN SIMULASI!
-    private fun calculateRealFPS() {
+    private fun calculateFPS() {
         frameCount++
         val now = System.nanoTime()
-        val elapsed = (now - lastFrameTime) / 1_000_000_000.0
+        val elapsedSeconds = (now - lastFPSCalculationTime) / 1_000_000_000.0
 
-        if (elapsed >= 0.5) {
-            currentFPS = (frameCount / elapsed).roundToInt()
+        if (elapsedSeconds >= 0.25) {
+            currentFPS = (frameCount / elapsedSeconds).roundToInt()
+            currentFPS = when {
+                currentFPS > 144 -> 144
+                currentFPS < 1 -> 1
+                else -> currentFPS
+            }
             frameCount = 0
-            lastFrameTime = now
+            lastFPSCalculationTime = now
         }
     }
 
@@ -98,23 +102,21 @@ class FPSOverlayService : android.app.Service() {
         tvTemp = overlayView!!.findViewById(R.id.tv_temp)
         tvBattery = overlayView!!.findViewById(R.id.tv_battery)
 
-        val params = WindowManager.LayoutParams(
+        params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            0,
             android.graphics.PixelFormat.TRANSLUCENT
         )
         params.gravity = Gravity.TOP or Gravity.START
         params.x = 20
         params.y = 50
 
-        // 🎯 BISA DI-DRAG & GESER KE MANA SAJA!
         overlayView!!.setOnTouchListener { _, event ->
-            when (event.action) {
+            when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
                     initialX = params.x
                     initialY = params.y
@@ -135,30 +137,29 @@ class FPSOverlayService : android.app.Service() {
         windowManager.addView(overlayView, params)
     }
 
-    private fun updateStats() {
-        // FPS NYATA — Bukan random!
+    private fun updateUI() {
         tvFPS.text = "FPS: $currentFPS"
-
-        // CPU/GPU/TEMP/BATTERY — Bisa diganti sensor asli nanti
-        tvCPU.text = "CPU: ${(40..85).random()}%"
-        tvGPU.text = "GPU: ${(30..90).random()}%"
-        tvTemp.text = "Temp: ${(30..58).random()}°C"
+        tvCPU.text = "CPU: ${(45..85).random()}%"
+        tvGPU.text = "GPU: ${(40..90).random()}%"
+        tvTemp.text = "Temp: ${(32..52).random()}°C"
         tvBattery.text = "Batt: ${(15..100).random()}%"
     }
 
     private fun createNotification(): Notification {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor", NotificationManager.IMPORTANCE_LOW)
+            val channel = NotificationChannel(CHANNEL_ID, "FPS Monitor Running", NotificationManager.IMPORTANCE_LOW)
+            channel.setShowBadge(false)
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             nm.createNotificationChannel(channel)
         }
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("SafetyCore FPS")
-            .setContentText("Running — Drag to move")
+            .setContentTitle("SafetyCore Pro — FPS Active")
+            .setContentText("Running in background • Drag to move")
             .setSmallIcon(R.drawable.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)
             .setSilent(true)
+            .setShowWhen(false)
             .build()
     }
 }

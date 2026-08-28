@@ -1,37 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SafetyCore Pro</string>
-    <string name="app_description">Game Booster &amp; Real-Time FPS Monitor — Drag &amp; Move Anywhere</string>
-
     <string name="show_fps_monitor">SHOW FPS MONITOR</string>
     <string name="stop_fps_monitor">STOP FPS MONITOR</string>
-    <string name="fps_running">FPS Monitor Running — Drag to move</string>
-    <string name="fps_stopped">FPS Monitor Stopped</string>
-    <string name="no_root_required">✅ Works on all devices — No Root Required</string>
-
-    <string name="game_booster">⚡ Game Booster</string>
-    <string name="fps_overlay">FPS Overlay — Drag &amp; Move Anywhere</string>
-    <string name="fps_unlock">Real-Time FPS — 60/90/120Hz Support</string>
-    <string name="anti_lag">Anti-Lag — Reduce Stutter &amp; Frame Drops</string>
-    <string name="thermal_bypass">Thermal Control — Prevent Overheating</string>
-    <string name="performance_mode">Performance Optimizer — CPU/GPU Priority</string>
-    <string name="graphics_smooth">Graphics Smooth — Enhanced Render Quality</string>
-    <string name="battery_optimize">Battery Saver — Optimized Background</string>
-
-    <string name="supported_games">🎯 Supported Games &amp; Packages</string>
-    <string name="game_qqspeed">QQ Speed / QQ飞车 — com.tencent.tmgp.speedmobile</string>
-    <string name="game_speeddrifters">Speed Drifters — com.garena.game.fctw</string>
-    <string name="game_mlbb">Mobile Legends — com.mobile.legends</string>
-    <string name="game_pubg">PUBG Mobile — com.tencent.ig</string>
-    <string name="game_ff">Free Fire — com.dts.freefireth</string>
-    <string name="game_codm">Call of Duty Mobile — com.activision.callofduty.shooter</string>
-    <string name="game_genshin">Genshin Impact — com.miHoYo.GenshinImpact</string>
-    <string name="game_hok">Honor of Kings — com.tencent.tmgp.sgame</string>
-    <string name="all_games">All Games — Universal Support</string>
-
-    <string name="label_fps">FPS</string>
-    <string name="label_cpu">CPU</string>
-    <string name="label_gpu">GPU</string>
-    <string name="label_temp">Temp</string>
-    <string name="label_battery">Batt</string>
 </resources>

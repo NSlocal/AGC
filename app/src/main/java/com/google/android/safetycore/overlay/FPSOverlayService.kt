@@ -75,7 +75,9 @@ class FPSOverlayService : android.app.Service() {
         super.onDestroy()
         isRunning = false
         frameCallback?.let { choreographer.removeFrameCallback(it) }
-        overlayView?.let { windowManager.removeView(it) }
+        overlayView?.let { 
+            try { windowManager.removeView(it) } catch (e: Exception) {}
+        }
         overlayView = null
         stopForeground(STOP_FOREGROUND_REMOVE)
     }
@@ -125,10 +127,12 @@ class FPSOverlayService : android.app.Service() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             else WindowManager.LayoutParams.TYPE_PHONE,
-            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             android.graphics.PixelFormat.TRANSLUCENT
         )
-        params.gravity = Gravity.TOP or Gravity.START
+        params.gravity = Gravity.TOP or Gravity.END
         params.x = 20
         params.y = 50
 
@@ -142,7 +146,7 @@ class FPSOverlayService : android.app.Service() {
                     return@setOnTouchListener true
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    params.x = initialX + (event.rawX - initialTouchX).toInt()
+                    params.x = initialX - (event.rawX - initialTouchX).toInt()
                     params.y = initialY + (event.rawY - initialTouchY).toInt()
                     windowManager.updateViewLayout(overlayView, params)
                     return@setOnTouchListener true
@@ -151,7 +155,11 @@ class FPSOverlayService : android.app.Service() {
             false
         }
 
-        windowManager.addView(overlayView, params)
+        try {
+            windowManager.addView(overlayView, params)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun updateUI() {
@@ -174,7 +182,7 @@ class FPSOverlayService : android.app.Service() {
         }
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("SafetyCore Pro — FPS Active")
-            .setContentText("Running • Drag to move • ${screenRefreshRate.roundToInt()}Hz")
+            .setContentText("Running • Drag to move")
             .setSmallIcon(R.drawable.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setOngoing(true)

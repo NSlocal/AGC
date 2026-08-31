@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="refresh_rate_options">
+        <item>60 FPS</item>
+        <item>90 FPS</item>
+        <item>120 FPS</item>
+        <item>144 FPS</item>
+        <item>Device Default</item>
+    </string-array>
+    <string-array name="refresh_rate_values">
+        <item>60</item>
+        <item>90</item>
+        <item>120</item>
+        <item>144</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="supported_games">
+        <item>QQ Speed (com.tencent.tmgp.speedmobile)</item>
+        <item>Speed Drifters (com.garena.game.fctw)</item>
+        <item>Genshin Impact</item>
+        <item>Wild Rift</item>
+    </string-array>
+</resources>

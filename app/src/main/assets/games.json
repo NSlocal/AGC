@@ -1,7 +1,7 @@
 {
   "supported_games": [
     {
-      "name": "QQ Speed / QQ飞车",
+      "name": "QQ飞车",
       "package": "com.tencent.tmgp.speedmobile",
       "max_fps": 120,
       "optimization": "refresh_rate, touch_response"

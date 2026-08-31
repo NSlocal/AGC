@@ -1,12 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="default_enabled">true</bool>
-    <bool name="default_scan_enabled">true</bool>
-    <bool name="default_nudity_warn">true</bool>
-    <bool name="default_sensitive_warn">true</bool>
-    <bool name="default_blur_enabled">true</bool>
-    <bool name="default_game_booster">true</bool>
-    <bool name="default_fps_unlock">true</bool>
-    <bool name="default_anti_lag">true</bool>
-    <bool name="default_thermal_bypass">true</bool>
-    <bool name="default_performance_mode">true</bool>
+    <bool name="default_dark_mode">true</bool>
+    <bool name="default_show_fps">true</bool>
+    <bool name="default_show_cpu">true</bool>
+    <bool name="default_show_gpu">true</bool>
+    <bool name="default_show_temp">true</bool>
+    <bool name="default_show_battery">true</bool>
+    <bool name="auto_start_overlay">false</bool>
+    <bool name="enable_animations">true</bool>
+    <bool name="enable_game_monitor">true</bool>
 </resources>

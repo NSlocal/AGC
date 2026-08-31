@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SafetyCore Pro</string>
+    <string name="fps_monitor">FPS Monitor</string>
+    <string name="game_booster">Game Booster</string>
+    <string name="settings">Settings</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="auto_start">Auto Start on Boot</string>
+    <string name="bg_opacity">Background Opacity</string>
+    <string name="text_size">Text Size</string>
+    <string name="show_cpu">Show CPU Usage</string>
+    <string name="show_gpu">Show GPU Usage</string>
+    <string name="show_temp">Show Temperature</string>
+    <string name="show_battery">Show Battery</string>
+    <string name="refresh_rate">Target Refresh Rate</string>
+    <string name="no_root_required">No Root Required</string>
 </resources>

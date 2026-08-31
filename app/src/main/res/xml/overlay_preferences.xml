@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:key="show_cpu"
+        android:title="@string/show_cpu"
+        android:summary="Display CPU usage percentage"
+        android:defaultValue="true"/>
+    <SwitchPreference
+        android:key="show_gpu"
+        android:title="@string/show_gpu"
+        android:summary="Display GPU usage percentage"
+        android:defaultValue="true"/>
+    <SwitchPreference
+        android:key="show_temp"
+        android:title="@string/show_temp"
+        android:summary="Display device temperature"
+        android:defaultValue="true"/>
+    <SwitchPreference
+        android:key="show_battery"
+        android:title="@string/show_battery"
+        android:summary="Display battery level"
+        android:defaultValue="true"/>
+    <SwitchPreference
+        android:key="auto_start_fps"
+        android:title="Auto Start FPS"
+        android:summary="Start overlay on device boot"
+        android:defaultValue="false"/>
+    <SwitchPreference
+        android:key="auto_start_boost"
+        android:title="Auto Start Booster"
+        android:summary="Start booster on device boot"
+        android:defaultValue="false"/>
+    <SliderPreference
+        android:key="bg_opacity"
+        android:title="@string/bg_opacity"
+        android:summary="Adjust overlay background transparency"
+        android:min="0"
+        android:max="255"
+        android:defaultValue="204"/>
+    <SliderPreference
+        android:key="text_size"
+        android:title="@string/text_size"
+        android:summary="Adjust overlay text size"
+        android:min="10"
+        android:max="24"
+        android:defaultValue="16"/>
+    <ListPreference
+        android:key="refresh_rate"
+        android:title="@string/refresh_rate"
+        android:summary="Select target refresh rate"
+        android:entries="@array/refresh_rate_options"
+        android:entryValues="@array/refresh_rate_values"
+        android:defaultValue="120"/>
+</PreferenceScreen>

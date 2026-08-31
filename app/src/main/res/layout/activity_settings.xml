@@ -1,47 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F5F5"
+    android:background="@color/bg_dark"
+    android:fillViewport="true"
     android:padding="20dp">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SafetyCore Pro"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="#6200EE"
-        android:padding="10dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Game Booster &amp; Real-Time FPS Monitor"
-        android:textSize="14sp"
-        android:gravity="center"
-        android:textColor="#757575"
-        android:layout_marginBottom="25dp"/>
-
-    <Button
-        android:id="@+id/btn_toggle_fps"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="SHOW FPS MONITOR"
-        android:background="#6200EE"
-        android:textColor="#FFFFFF"
-        android:textSize="17sp"
-        android:layout_marginBottom="25dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Works on all devices — No Root Required"
-        android:textSize="14sp"
-        android:padding="10dp"
-        android:background="#E8F5E9"
-        android:textColor="#2E7D32"/>
-
-</LinearLayout>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SafetyCore Pro"
+            android:textColor="@color/accent_green"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="15dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FPS Monitor • Game Booster • No Root Required"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_marginBottom="25dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/bg_card"
+            android:padding="18dp"
+            android:layout_marginBottom="15dp"
+            android:elevation="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎮 FPS Monitor"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Real-time overlay with drag &amp; move support"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginBottom="15dp"/>
+            <Button
+                android:id="@+id/btn_toggle_fps"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="🎮 SHOW FPS MONITOR"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/bg_card"
+            android:padding="18dp"
+            android:layout_marginBottom="15dp"
+            android:elevation="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚡ Game Booster"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Optimized for QQ Speed, Speed Drifters &amp; more"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:layout_marginBottom="15dp"/>
+            <Button
+                android:id="@+id/btn_toggle_boost"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="⚡ START GAME BOOST"
+                android:backgroundTint="@color/accent_orange"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/bg_card"
+            android:padding="18dp"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚙️ Overlay Settings"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+            <Button
+                android:id="@+id/btn_settings_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="Customize Overlay..."
+                android:backgroundTint="@color/accent_blue"
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/bg_card"
+            android:padding="18dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dark Mode"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+            <android.widget.Switch
+                android:id="@+id/switch_dark_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="✅ Works without Root • Supports 60/90/120/144 FPS"
+            android:textColor="@color/accent_green"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:padding="15dp"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+</ScrollView>

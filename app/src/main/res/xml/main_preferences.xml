@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="🎮 Overlay">
+        <SwitchPreference
+            android:key="show_fps"
+            android:title="Show FPS"
+            android:summary="Display frame rate"
+            android:defaultValue="true"/>
+        <SwitchPreference
+            android:key="show_cpu"
+            android:title="Show CPU"
+            android:summary="Display CPU usage"
+            android:defaultValue="true"/>
+        <SwitchPreference
+            android:key="show_gpu"
+            android:title="Show GPU"
+            android:summary="Display GPU usage"
+            android:defaultValue="true"/>
+        <SwitchPreference
+            android:key="show_temp"
+            android:title="Show Temperature"
+            android:summary="Display device temperature"
+            android:defaultValue="true"/>
+        <SwitchPreference
+            android:key="show_battery"
+            android:title="Show Battery"
+            android:summary="Display battery level"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="🎨 Appearance">
+        <Preference
+            android:key="themes"
+            android:title="Overlay Theme"
+            android:summary="Choose color preset"
+            android:icon="@drawable/ic_theme"/>
+        <SliderPreference
+            android:key="bg_opacity"
+            android:title="Background Opacity"
+            android:min="0"
+            android:max="255"
+            android:defaultValue="204"/>
+        <SliderPreference
+            android:key="text_size"
+            android:title="Text Size"
+            android:min="10"
+            android:max="24"
+            android:defaultValue="16"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="⚡ Performance">
+        <Preference
+            android:key="benchmark"
+            android:title="FPS Benchmark"
+            android:summary="Run stability test"
+            android:icon="@drawable/ic_benchmark"/>
+        <ListPreference
+            android:key="refresh_rate"
+            android:title="Target Refresh Rate"
+            android:entries="@array/refresh_rate_options"
+            android:entryValues="@array/refresh_rate_values"
+            android:defaultValue="120"/>
+        <SwitchPreference
+            android:key="enable_fps_alert"
+            android:title="FPS Drop Alert"
+            android:summary="Notify when FPS drops too low"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="📱 General">
+        <Preference
+            android:key="games_list"
+            android:title="Supported Games"
+            android:summary="Manage game list"
+            android:icon="@drawable/ic_game"/>
+        <SwitchPreference
+            android:key="dark_mode"
+            android:title="Dark Mode"
+            android:summary="App theme"
+            android:defaultValue="true"/>
+        <SwitchPreference
+            android:key="auto_start_fps"
+            android:title="Auto Start on Boot"
+            android:summary="Start overlay automatically"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="ℹ️ About">
+        <Preference
+            android:key="about"
+            android:title="About SafetyCore Pro"
+            android:summary="Version, credits, info"
+            android:icon="@drawable/ic_info"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

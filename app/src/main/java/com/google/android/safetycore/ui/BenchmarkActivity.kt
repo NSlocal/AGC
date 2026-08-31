@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="default_dark_mode">true</bool>
+    <bool name="default_show_fps">true</bool>
+    <bool name="default_show_cpu">true</bool>
+    <bool name="default_show_gpu">true</bool>
+    <bool name="default_show_temp">true</bool>
+    <bool name="default_show_battery">true</bool>
+    <bool name="auto_start_overlay">false</bool>
+    <bool name="enable_animations">true</bool>
+    <bool name="enable_game_monitor">true</bool>
+</resources>
+  

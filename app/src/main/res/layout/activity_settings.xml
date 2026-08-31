@@ -1,145 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_dark"
-    android:fillViewport="true"
-    android:padding="20dp">
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SafetyCore Pro"
+            android:text="← Back"
+            android:backgroundTint="@color/accent_blue"
+            android:textColor="@color/white"
+            android:minWidth="60dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="⚙️ Settings"
             android:textColor="@color/accent_green"
-            android:textSize="28sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:padding="15dp"/>
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <!-- Main Controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bg_card"
+        android:padding="18dp"
+        android:layout_marginBottom="15dp">
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FPS Monitor • Game Booster • No Root Required"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp"
-            android:gravity="center"
-            android:layout_marginBottom="25dp"/>
-        <LinearLayout
+            android:text="🎮 Controls"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btn_toggle_fps"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/bg_card"
-            android:padding="18dp"
-            android:layout_marginBottom="15dp"
-            android:elevation="2dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🎮 FPS Monitor"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Real-time overlay with drag &amp; move support"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp"
-                android:layout_marginBottom="15dp"/>
-            <Button
-                android:id="@+id/btn_toggle_fps"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="🎮 SHOW FPS MONITOR"
-                android:backgroundTint="@color/purple_500"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
-        </LinearLayout>
-        <LinearLayout
+            android:layout_height="52dp"
+            android:text="🎯 FPS Overlay Settings"
+            android:backgroundTint="@color/accent_green"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_toggle_boost"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/bg_card"
-            android:padding="18dp"
-            android:layout_marginBottom="15dp"
-            android:elevation="2dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⚡ Game Booster"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Optimized for QQ Speed, Speed Drifters &amp; more"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp"
-                android:layout_marginBottom="15dp"/>
-            <Button
-                android:id="@+id/btn_toggle_boost"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="⚡ START GAME BOOST"
-                android:backgroundTint="@color/accent_orange"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
-        </LinearLayout>
-        <LinearLayout
+            android:layout_height="52dp"
+            android:text="⚡ Game Booster"
+            android:backgroundTint="@color/accent_purple"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_settings_overlay"
             android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="🔧 Customize Overlay"
+            android:backgroundTint="@color/accent_blue"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <!-- Tools Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bg_card"
+        android:padding="18dp"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/bg_card"
-            android:padding="18dp"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⚙️ Overlay Settings"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp"/>
-            <Button
-                android:id="@+id/btn_settings_overlay"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="Customize Overlay..."
-                android:backgroundTint="@color/accent_blue"
-                android:textColor="@color/white"
-                android:textSize="15sp"/>
-        </LinearLayout>
+            android:text="🛠️ Tools"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btn_benchmark"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="📊 FPS Benchmark Test"
+            android:backgroundTint="@color/accent_orange"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_games"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="🎮 Supported Games List"
+            android:backgroundTint="@color/accent_blue"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_about"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="ℹ️ About SafetyCore Pro"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@color/white"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <!-- Appearance -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/bg_card"
+        android:padding="18dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎨 Appearance"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/bg_card"
-            android:padding="18dp">
+            android:gravity="center_vertical">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Dark Mode"
                 android:textColor="@color/white"
-                android:textSize="16sp"/>
-            <android.widget.Switch
+                android:textSize="15sp"/>
+
+            <Switch
                 android:id="@+id/switch_dark_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="✅ Works without Root • Supports 60/90/120/144 FPS"
-            android:textColor="@color/accent_green"
-            android:textSize="13sp"
-            android:gravity="center"
-            android:padding="15dp"
-            android:layout_marginTop="10dp"/>
     </LinearLayout>
-</ScrollView>
+
+</LinearLayout>

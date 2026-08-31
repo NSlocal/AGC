@@ -1,0 +1,28 @@
+{
+  "supported_games": [
+    {
+      "name": "QQ Speed / QQ飞车",
+      "package": "com.tencent.tmgp.speedmobile",
+      "max_fps": 120,
+      "optimization": "refresh_rate, touch_response"
+    },
+    {
+      "name": "Speed Drifters",
+      "package": "com.garena.game.fctw",
+      "max_fps": 120,
+      "optimization": "refresh_rate, touch_response"
+    },
+    {
+      "name": "Genshin Impact",
+      "package": "com.miHoYo.GenshinImpact",
+      "max_fps": 60,
+      "optimization": "stability, power_efficiency"
+    },
+    {
+      "name": "Wild Rift",
+      "package": "com.riotgames.leagueoflegends.wildrift",
+      "max_fps": 120,
+      "optimization": "input_latency, render_ahead"
+    }
+  ]
+}

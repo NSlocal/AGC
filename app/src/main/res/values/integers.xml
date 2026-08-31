@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="default_fps_target">120</integer>
+    <integer name="overlay_update_interval">500</integer>
+    <integer name="auto_start_delay">3000</integer>
+    <integer name="max_supported_games">50</integer>
+    <integer name="overlay_min_width">120</integer>
+    <integer name="overlay_max_width">300</integer>
+</resources>

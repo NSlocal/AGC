@@ -1,67 +1,81 @@
 package com.google.android.safetycore.ui
-
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.safetycore.overlay.FPSOverlayService
+import androidx.preference.PreferenceManager
 import com.google.android.safetycore.R
+import com.google.android.safetycore.databinding.ActivitySettingsBinding
+import com.google.android.safetycore.overlay.FPSOverlayService
+import com.google.android.safetycore.service.GameBoostService
 
 class SettingsActivity : AppCompatActivity() {
-    private lateinit var btn: Button
-    private val RC_PERM = 1234
+    private lateinit var binding: ActivitySettingsBinding
+    private lateinit var prefs: SharedPreferences
+    private val RC_OVERLAY = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
-        btn = findViewById(R.id.btn_toggle_fps)
-        updateBtn()
-        btn.setOnClickListener { toggle() }
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        setupUI()
+        updateAllStates()
     }
 
-    override fun onResume() {
-        super.onResume()
-        updateBtn()
+    private fun setupUI() {
+        binding.btnToggleFps.setOnClickListener { toggleFPS() }
+        binding.btnToggleBoost.setOnClickListener { toggleBoost() }
+        binding.btnSettingsOverlay.setOnClickListener {
+            startActivity(Intent(this, FloatingSettingsActivity::class.java))
+        }
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean("dark_mode", isChecked).apply()
+        }
     }
 
-    private fun hasPerm(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Settings.canDrawOverlays(this)
-        } else true
-    }
+    private fun hasOverlayPerm() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        Settings.canDrawOverlays(this) else true
 
-    private fun toggle() {
-        if (!hasPerm()) {
-            val i = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
-            startActivityForResult(i, RC_PERM)
+    private fun toggleFPS() {
+        if (!hasOverlayPerm()) {
+            startActivityForResult(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:$packageName")), RC_OVERLAY)
             Toast.makeText(this, "Allow overlay permission", Toast.LENGTH_LONG).show()
             return
         }
         val i = Intent(this, FPSOverlayService::class.java)
+        FPSOverlayService.isRunning = !FPSOverlayService.isRunning
         if (FPSOverlayService.isRunning) {
-            stopService(i)
-            Toast.makeText(this, "Stopped", Toast.LENGTH_SHORT).show()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(i)
+            else startService(i)
+            Toast.makeText(this, "✅ FPS Monitor Started", Toast.LENGTH_SHORT).show()
         } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(i)
-            } else {
-                startService(i)
-            }
-            Toast.makeText(this, "FPS Started — Check top-right!", Toast.LENGTH_LONG).show()
+            stopService(i)
+            Toast.makeText(this, "⏹ FPS Monitor Stopped", Toast.LENGTH_SHORT).show()
         }
-        updateBtn()
+        updateAllStates()
     }
 
-    private fun updateBtn() {
-        btn.text = if (FPSOverlayService.isRunning) "STOP FPS" else "SHOW FPS MONITOR"
+    private fun toggleBoost() {
+        val i = Intent(this, GameBoostService::class.java)
+        GameBoostService.isRunning = !GameBoostService.isRunning
+        if (GameBoostService.isRunning) startService(i) else stopService(i)
+        updateAllStates()
+    }
+
+    private fun updateAllStates() {
+        binding.btnToggleFps.text = if (FPSOverlayService.isRunning) "⏹ STOP FPS" else "🎮 SHOW FPS MONITOR"
+        binding.btnToggleBoost.text = if (GameBoostService.isRunning) "🚀 BOOST ACTIVE" else "⚡ START GAME BOOST"
+        binding.switchDarkMode.isChecked = prefs.getBoolean("dark_mode", true)
     }
 
     override fun onActivityResult(rq: Int, rs: Int, d: Intent?) {
         super.onActivityResult(rq, rs, d)
-        if (rq == RC_PERM && hasPerm()) toggle()
+        if (rq == RC_OVERLAY && hasOverlayPerm()) toggleFPS()
     }
 }

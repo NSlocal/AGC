@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="OverlayView">
+        <attr name="showFps" format="boolean"/>
+        <attr name="showCpu" format="boolean"/>
+        <attr name="showGpu" format="boolean"/>
+        <attr name="overlayTextSize" format="dimension"/>
+        <attr name="overlayBackground" format="color"/>
+    </declare-styleable>
+</resources>

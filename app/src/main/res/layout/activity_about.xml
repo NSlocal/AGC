@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🚀"
+        android:textSize="64sp"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SafetyCore Pro"
+        android:textColor="@color/accent_green"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 2.0"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Game Performance Toolkit — FPS Monitor &amp; Game Booster\nNo Root Required"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:lineSpacingExtra="4dp"/>
+
+    <TextView
+        android:id="@+id/tv_credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Built with ❤️ by NSlocal\nGitHub: github.com/NSlocal/AGC"
+        android:textColor="@color/accent_blue"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:lineSpacingExtra="4dp"/>
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="← Back"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

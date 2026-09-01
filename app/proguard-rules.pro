@@ -1,1 +1,2 @@
 -keep class com.google.android.safetycore.** { *; }
+-dontwarn com.google.android.safetycore.**

@@ -2,21 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SafetyCore"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="40dp"/>
-    <Button
-        android:id="@+id/btn_overlay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TAMPILKAN FPS MONITOR"
-        android:paddingVertical="16dp"
-        android:textSize="16sp"/>
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="#F5F5F5">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="🛡️ SafetyCore" android:textSize="28sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Perlindungan konten & pemantauan FPS" android:textSize="14sp" android:layout_marginBottom="40dp"/>
+    <Button android:id="@+id/btn_scan_image" android:layout_width="match_parent" android:layout_height="60dp"
+        android:text="🖼️ Pindai Gambar" android:textSize="16sp" android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/purple_500"/>
+    <Button android:id="@+id/btn_settings" android:layout_width="match_parent" android:layout_height="60dp"
+        android:text="⚙️ Pengaturan" android:textSize="16sp" android:layout_marginBottom="16dp"
+        android:backgroundTint="#757575"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="✅ Diizinkan • ⚠️ Peringatan • 🚫 Diblokir • ❓ Tidak Diklasifikasikan"
+        android:textSize="13sp" android:padding="16dp" android:background="#E8F5E9" android:layout_marginTop="24dp"/>
 </LinearLayout>

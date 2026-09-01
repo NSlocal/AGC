@@ -24,6 +24,23 @@
         <activity android:name=".ui.ContentWarningActivity" android:exported="false"
             android:theme="@style/Theme.SafetyCore.Transparent" />
 
+        <!-- Tambahkan di dalam <application> -->
+<activity android:name=".ui.HistoryActivity" android:exported="false" />
+<activity android:name=".ui.ThemeSelectorActivity" android:exported="false" />
+<activity android:name=".ui.LockSetupActivity" android:exported="false" />
+
+<receiver android:name=".ui.ShareInterceptor" android:exported="true">
+    <intent-filter>
+        <action android:name="android.intent.action.SEND" />
+        <action android:name="android.intent.action.SEND_MULTIPLE" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <data android:mimeType="image/*" />
+    </intent-filter>
+</receiver>
+
+<service android:name=".overlay.SystemMonitorOverlayService" android:exported="false" />
+        
+
         <service android:name=".content.ContentScannerService" android:foregroundServiceType="specialUse" android:exported="false" />
         <service android:name=".overlay.BlurOverlayService" android:exported="false" />
         <service android:name=".overlay.FPSOverlayService" android:exported="false" />

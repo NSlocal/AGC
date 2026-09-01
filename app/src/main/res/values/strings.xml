@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SafetyCore Pro</string>
-    <string name="fps_monitor">FPS Monitor</string>
-    <string name="game_booster">Game Booster</string>
-    <string name="settings">Settings</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="auto_start">Auto Start on Boot</string>
-    <string name="bg_opacity">Background Opacity</string>
-    <string name="text_size">Text Size</string>
-    <string name="show_cpu">Show CPU Usage</string>
-    <string name="show_gpu">Show GPU Usage</string>
-    <string name="show_temp">Show Temperature</string>
-    <string name="show_battery">Show Battery</string>
-    <string name="refresh_rate">Target Refresh Rate</string>
-    <string name="no_root_required">No Root Required</string>
+    <string name="app_name">SafetyCore</string>
+    <string name="scan_image">Pindai Gambar</string>
+    <string name="settings">Pengaturan</string>
+    <string name="warning_title">Peringatan Konten</string>
+    <string name="warning_message">Konten ini mungkin mengandung materi sensitif.</string>
+    <string name="show_anyway">Tetap Tampilkan</string>
+    <string name="block">Blokir</string>
+    <string name="status_allowed">Diizinkan</string>
+    <string name="status_warning">Peringatan</string>
+    <string name="status_blocked">Diblokir</string>
+    <string name="status_unclassified">Tidak Diklasifikasikan</string>
+    <string name="scan_enabled">Aktifkan Pemindaian Konten</string>
+    <string name="auto_blur">Blur Otomatis Konten Sensitif</string>
+    <string name="block_sensitive">Blokir Konten Berbahaya</string>
+    <string name="fps_overlay">Tampilkan FPS Monitor</string>
+    <string name="blur_overlay">Blur Overlay Konten</string>
+    <string name="stop_all">Matikan Semua Fitur</string>
+    <string name="info_privacy">Semua fitur dapat dimatikan kapan saja. Tidak mengirim data tanpa izin.</string>
 </resources>

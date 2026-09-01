@@ -21,26 +21,11 @@ jobs:
       - name: Grant execute permission
         run: chmod +x gradlew
 
-      - name: Debug — List files
-        run: |
-          ls -la
-          ls -la app/
-      
-      - name: Debug — Check Gradle files
-        run: |
-          cat build.gradle
-          echo "---"
-          cat settings.gradle
-          echo "---"
-          cat app/build.gradle
-
       - name: Build Release APK
-        run: ./gradlew assembleRelease --no-daemon --stacktrace 2>&1
-        continue-on-error: false
+        run: ./gradlew assembleRelease --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
-        if: success()
         with:
           name: SafetyCore-APK
           path: app/build/outputs/apk/release/*.apk

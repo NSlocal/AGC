@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#CC000000"
+    android:padding="8dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_cpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CPU: 0%"
+        android:textColor="#4CAF50"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_gpu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPU: 0%"
+        android:textColor="#2196F3"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"/>
+
+    <TextView
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temp: 0°C"
+        android:textColor="#FFC107"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"/>
+
+    <TextView
+        android:id="@+id/tv_battery_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batt: 0°C"
+        android:textColor="#FF9800"
+        android:textSize="11sp"
+        android:layout_marginTop="2dp"/>
+
+</LinearLayout>

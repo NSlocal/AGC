@@ -1,5 +1,4 @@
 name: Build & Release APK
-
 on:
   push:
     branches: [ main ]
@@ -8,27 +7,41 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
+    timeout-minutes: 20
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4.0.0
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Grant execute permission for gradlew
+      - name: Grant execute permission
         run: chmod +x gradlew
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease --no-daemon
+      - name: Debug — List files
+        run: |
+          ls -la
+          ls -la app/
+      
+      - name: Debug — Check Gradle files
+        run: |
+          cat build.gradle
+          echo "---"
+          cat settings.gradle
+          echo "---"
+          cat app/build.gradle
 
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4.4.0
+      - name: Build Release APK
+        run: ./gradlew assembleRelease --no-daemon --stacktrace 2>&1
+        continue-on-error: false
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        if: success()
         with:
-          name: SafetyCore-Pro-APK-v2.0
-          path: app/build/outputs/apk/release/app-release.apk
+          name: SafetyCore-APK
+          path: app/build/outputs/apk/release/*.apk
           retention-days: 30

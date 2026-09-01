@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
@@ -16,31 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SafetyCore">
 
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="true">
+        <activity android:name=".ui.MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.SettingsActivity" android:exported="false" />
-        <activity
-            android:name=".ui.ContentWarningActivity"
-            android:exported="false"
+        <activity android:name=".ui.ContentWarningActivity" android:exported="false"
             android:theme="@style/Theme.SafetyCore.Transparent" />
 
-        <service
-            android:name=".content.ContentScannerService"
-            android:foregroundServiceType="specialUse"
-            android:exported="false" />
-        <service
-            android:name=".overlay.BlurOverlayService"
-            android:exported="false" />
-        <service
-            android:name=".overlay.FPSOverlayService"
-            android:exported="false" />
-
+        <service android:name=".content.ContentScannerService" android:foregroundServiceType="specialUse" android:exported="false" />
+        <service android:name=".overlay.BlurOverlayService" android:exported="false" />
+        <service android:name=".overlay.FPSOverlayService" android:exported="false" />
     </application>
 </manifest>

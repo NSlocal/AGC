@@ -1,16 +1,26 @@
-// ==================================================
-// SAFETYCORE — ROOT build.gradle
-// Versi: 1.0.0 — SIAP BUILD
-// ==================================================
-
-plugins {
-    id 'com.android.application' version '8.2.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.9.20' apply false
+buildscript {
+    ext.kotlin_version = "1.9.20"
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.2.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 
-// ==================================================
-// CATATAN:
-// HANYA 3 BARIS INI! JANGAN TAMBAH buildscript!
-// JANGAN TAMBAH repositories DI SINI!
-// Semua repositori di settings.gradle
-// ==================================================
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildFileName = 'build.gradle'

@@ -3,6 +3,7 @@ package com.google.android.safetycore.ui
 import android.os.Bundle
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.safetycore.R
 import com.google.android.safetycore.databinding.ActivityThemeSelectorBinding
 
 class ThemeSelectorActivity : AppCompatActivity() {

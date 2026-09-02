@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="24dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="🔐 Kunci Pengaturan" android:textSize="22sp" android:textStyle="bold" android:layout_marginBottom="24dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Masukkan PIN minimal 4 digit:" android:textSize="14sp" android:layout_marginBottom="8dp"/>
+    <EditText android:id="@+id/et_pin" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:inputType="numberPassword" android:hint="PIN" android:layout_marginBottom="16dp"/>
+    <EditText android:id="@+id/et_confirm_pin" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:inputType="numberPassword" android:hint="Konfirmasi PIN" android:layout_marginBottom="24dp"/>
+    <Button android:id="@+id/btn_set_pin" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Simpan PIN" android:backgroundTint="#6200EE" android:layout_marginBottom="8dp"/>
+    <Button android:id="@+id/btn_remove_lock" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Hapus Kunci" android:backgroundTint="#F44336"/>
+</LinearLayout>

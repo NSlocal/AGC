@@ -13,4 +13,4 @@ buildscript {
     }
 }
 
-rootProject.buildFileName = 'build.gradle'
+// ✅ TIDAK ADA baris rootProject.buildFileName! — itu yang bikin error!

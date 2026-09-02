@@ -1,38 +1,24 @@
 package com.google.android.safetycore.ui
 
-import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.safetycore.R
-import com.google.android.safetycore.databinding.ActivityDeviceInfoBinding
 import com.google.android.safetycore.monitor.SystemMonitor
+import com.google.android.safetycore.service.SystemMonitorOverlayService
+import kotlinx.android.synthetic.main.activity_device_info.*
 
 class DeviceInfoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDeviceInfoBinding
+    private var systemMonitor: SystemMonitor? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDeviceInfoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_device_info)
 
-        binding.tvDeviceModel.text = Build.MODEL
-        binding.tvManufacturer.text = Build.MANUFACTURER
-        binding.tvAndroidVersion.text = Build.VERSION.RELEASE
-        binding.tvSdkLevel.text = Build.VERSION.SDK_INT.toString()
-        binding.tvCpu.text = Build.HARDWARE
-
-        val isScanRunning = SettingsActivity.isScanEnabled(this)
-        val isFpsRunning = SettingsActivity.isFPSOverlayEnabled(this)
-        val isMonitorRunning = SettingsActivity.isSystemMonitorEnabled(this)
-
-        binding.tvScanStatus.text = if (isScanRunning) "✅ Aktif" else "❌ Dinonaktifkan"
-        binding.tvFpsStatus.text = if (isFpsRunning) "✅ Aktif" else "❌ Dinonaktifkan"
-        binding.tvMonitorStatus.text = if (isMonitorRunning) "✅ Aktif" else "❌ Dinonaktifkan"
-
-        binding.btnRefresh.setOnClickListener {
-            Toast.makeText(this, "Diperbarui", Toast.LENGTH_SHORT).show()
-            recreate()
+        if (SystemMonitorOverlayService.isSystemMonitorEnabled(this)) {
+            systemMonitor = SystemMonitor(this)
+            tvCpu.text = "CPU: Aktif"
+        } else {
+            tvCpu.text = "CPU: Tidak dipantau"
         }
     }
 }

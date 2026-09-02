@@ -66,6 +66,16 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnScanImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/scan_image"
+        android:backgroundTint="#FF6B00"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="12dp"
+        android:paddingVertical="14dp"/>
+
+    <Button
         android:id="@+id/btn_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

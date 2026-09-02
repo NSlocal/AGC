@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 android {
@@ -10,10 +9,12 @@ android {
 
     defaultConfig {
         applicationId "com.google.android.safetycore"
-        minSdk 21
+        minSdk 34
         targetSdk 34
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "VERSION_NAME", "\"1.0\""
+        buildConfigField "int", "VERSION_CODE", "1"
     }
 
     buildTypes {
@@ -30,7 +31,7 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding true
+        buildConfig true
     }
 }
 
@@ -38,7 +39,4 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
-    implementation 'androidx.preference:preference-ktx:1.2.1'
 }

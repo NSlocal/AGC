@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- ✅ IZIN DIPERLUKAN -->
+    <!-- ============================================== -->
+    <!-- ✅ IZIN YANG DIBUTUHKAN -->
+    <!-- ============================================== -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -9,9 +11,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-    <!-- ✅ MINIMUM & TARGET SDK -->
-    <uses-sdk android:minSdkVersion="34" android:targetSdkVersion="34" />
+    <!-- ============================================== -->
+    <!-- ✅ VERSI SDK -->
+    <!-- ============================================== -->
+    <uses-sdk
+        android:minSdkVersion="33"
+        android:targetSdkVersion="34" />
 
+    <!-- ============================================== -->
+    <!-- ✅ APLIKASI -->
+    <!-- ============================================== -->
     <application
         android:name=".SafetyCoreApp"
         android:allowBackup="true"
@@ -48,7 +57,7 @@
         <activity android:name=".ui.FeedbackActivity" android:exported="false" />
 
         <!-- ============================================== -->
-        <!-- ✅ SERVICE — SEMUA OVERLAY & SCAN -->
+        <!-- ✅ SERVICE — SEMUA LENGKAP -->
         <!-- ============================================== -->
         <service android:name=".content.ContentScannerService"
             android:foregroundServiceType="specialUse"
@@ -60,7 +69,7 @@
         <service android:name=".overlay.DraggableFpsOverlayService" android:exported="false" />
 
         <!-- ============================================== -->
-        <!-- ✅ BROADCAST RECEIVER — SHARE INTERCEPT & KONTEN -->
+        <!-- ✅ BROADCAST RECEIVER — CUKUP SATU SAJA! TANPA DUPLIKAT! -->
         <!-- ============================================== -->
         <receiver android:name=".ui.ShareInterceptor" android:exported="true">
             <intent-filter>
@@ -71,14 +80,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".content.ContentAwareReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-        </receiver>
-
     </application>
+
 </manifest>

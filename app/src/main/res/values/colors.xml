@@ -24,4 +24,7 @@
     <!-- Status Colors -->
     <color name="red_blocked">#F44336</color>
     <color name="green_allowed">#4CAF50</color>
+    
+    <!-- Overlay Colors -->
+    <color name="black_transparent">#80000000</color>
 </resources>

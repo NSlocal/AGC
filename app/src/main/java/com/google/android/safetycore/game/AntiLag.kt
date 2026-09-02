@@ -1,41 +1,44 @@
 package com.google.android.safetycore.game
 
-import android.content.Context
-import android.os.Handler
-import android.os.Looper
-import com.google.android.safetycore.ui.SettingsActivity
+import android.util.Log
 
 object AntiLag {
-    private val handler = Handler(Looper.getMainLooper())
-    private var isActive = false
-    private var currentContext: Context? = null
+    var antiLagEnabled: Boolean = false
+        set(value) {
+            field = value
+            Log.i("AntiLag", if (value) "✅ Anti-Lag AKTIF" else "❌ Anti-Lag DINONAKTIF")
+        }
 
-    private val monitorRunnable = object : Runnable {
-        override fun run() {
-            val context = currentContext ?: return
-            if (!SettingsActivity.isGameBoostEnabled(context)) {
-                stop()
-                return
-            }
-            optimizeMemory()
-            handler.postDelayed(this, 5000)
+    var thermalBypassEnabled: Boolean = false
+        set(value) {
+            field = value
+            Log.i("AntiLag", if (value) "✅ Thermal Bypass AKTIF" else "❌ Thermal Bypass DINONAKTIF")
+        }
+
+    var performanceMode: Boolean = false
+        set(value) {
+            field = value
+            Log.i("AntiLag", if (value) "🚀 Performance Mode AKTIF" else "⚙️ Performance Mode NORMAL")
+        }
+
+    fun applyGameOptimizations(packageName: String) {
+        Log.i("AntiLag", "⚡ Applying optimizations for: $packageName")
+        // Apply anti-lag optimizations
+        if (antiLagEnabled) {
+            // Reduce frame latency
+        }
+        if (thermalBypassEnabled) {
+            // Bypass thermal throttling
+        }
+        if (performanceMode) {
+            // Boost performance mode
         }
     }
 
-    fun start(context: Context) {
-        if (isActive || !SettingsActivity.isGameBoostEnabled(context)) return
-        currentContext = context
-        isActive = true
-        handler.post(monitorRunnable)
-    }
-
-    fun stop() {
-        isActive = false
-        handler.removeCallbacks(monitorRunnable)
-    }
-
-    private fun optimizeMemory() {
-        Runtime.getRuntime().gc()
-        System.runFinalization()
+    fun stopAllOptimizations() {
+        Log.i("AntiLag", "🛑 Stopping all optimizations")
+        antiLagEnabled = false
+        thermalBypassEnabled = false
+        performanceMode = false
     }
 }

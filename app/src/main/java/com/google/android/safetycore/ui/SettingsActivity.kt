@@ -51,7 +51,7 @@ class SettingsActivity : AppCompatActivity() {
             if (v) startService(Intent(this, FPSOverlayService::class.java))
             else stopService(Intent(this, FPSOverlayService::class.java))
         }
-        binding.blurOverlayEnabled.setOnCheckedChangeListener { _, v ->
+        binding.blurOverlayEnabled.setOnCheckedChangeListener { _, v: Boolean ->
             prefs.edit().putBoolean(KEY_BLUR_OVERLAY, v).apply()
             if (v) startService(Intent(this, BlurOverlayService::class.java))
             else stopService(Intent(this, BlurOverlayService::class.java))

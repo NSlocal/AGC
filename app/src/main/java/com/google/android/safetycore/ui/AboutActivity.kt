@@ -12,14 +12,22 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupUI()
-    }
 
-    private fun setupUI() {
-        binding.tvAppName.text = "SafetyCore Pro"
-        binding.tvVersion.text = "Version ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
-        binding.tvDesc.text = "Game Performance Toolkit — FPS Monitor & Game Booster\nNo Root Required"
-        binding.tvCredits.text = "Built with ❤️ by NSlocal\nGitHub: github.com/NSlocal/AGC"
-        binding.btnBack.setOnClickListener { finish() }
+        binding.tvAppName.text = "🛡️ SafetyCore"
+        binding.tvVersion.text = "Versi ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        binding.tvDescription.text = """
+        Perlindungan konten & pemantauan sistem
+        
+        ✅ Pemindaian gambar
+        ✅ Blur otomatis konten sensitif
+        ✅ FPS Monitor
+        ✅ Monitor CPU/GPU/Suhu
+        ✅ Game Booster (QQ飞车 / Speed Drifters)
+        ✅ Riwayat pemindaian
+        ✅ Tema & kunci pengaturan
+        ✅ Semua fitur dapat dinonaktifkan
+        
+        © 2026 SafetyCore — Privasi & Kendali di Tangan Anda
+        """.trimIndent()
     }
 }

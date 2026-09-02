@@ -11,7 +11,7 @@ object FpsUnlocker {
     fun getAvailableFps(): List<Int> = FPS_OPTIONS
 
     fun setMaxFps(context: Context, fps: Int): Boolean {
-        if (!SettingsActivity.isFPSBoostEnabled(context)) return false
+        if (!SettingsActivity.isGameBoostEnabled(context)) return false
         if (!FPS_OPTIONS.contains(fps)) return false
 
         return try {
@@ -31,5 +31,17 @@ object FpsUnlocker {
     fun getCurrentFps(context: Context): Int {
         return context.getSharedPreferences("SafetyCorePrefs", Context.MODE_PRIVATE)
             .getInt("target_fps", 60)
+    }
+
+    fun enableFPSUnlock() {
+        // Implementation for enabling FPS unlock
+    }
+
+    fun disableFPSUnlock() {
+        // Implementation for disabling FPS unlock
+    }
+
+    fun setTargetFPS(packageName: String, fps: Int) {
+        // Implementation for setting target FPS for a specific game
     }
 }

@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="🛡️ SafetyCore"
+        android:text="@string/app_name"
         android:textSize="28sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Perlindungan Konten & Pemantauan Sistem"
+        android:text="@string/app_subtitle"
         android:textSize="14sp"
         android:gravity="center"
         android:textColor="@android:color/darker_gray"
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🔐 Status Layanan"
+            android:text="@string/service_status"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="12dp"/>
@@ -45,7 +45,7 @@
             android:id="@+id/tv_scan_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📤 Pemindaian Gambar: ✅ Aktif"
+            android:text="@string/scan_enabled"
             android:textSize="14sp"
             android:layout_marginBottom="4dp"/>
 
@@ -53,7 +53,7 @@
             android:id="@+id/tv_fps_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📈 FPS Monitor: ✅ Aktif"
+            android:text="@string/fps_enabled"
             android:textSize="14sp"
             android:layout_marginBottom="4dp"/>
 
@@ -61,7 +61,7 @@
             android:id="@+id/tv_monitor_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📊 Sistem Monitor: ✅ Aktif"
+            android:text="@string/monitor_enabled"
             android:textSize="14sp"/>
     </LinearLayout>
 
@@ -69,7 +69,7 @@
         android:id="@+id/btn_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="⚙️ Pengaturan Lengkap"
+        android:text="@string/settings"
         android:backgroundTint="#6200EE"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="12dp"
@@ -79,7 +79,7 @@
         android:id="@+id/btn_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="📋 Riwayat Pemindaian"
+        android:text="@string/history"
         android:backgroundTint="#2196F3"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="12dp"
@@ -89,7 +89,7 @@
         android:id="@+id/btn_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ℹ️ Tentang SafetyCore"
+        android:text="@string/about"
         android:backgroundTint="#4CAF50"
         android:textColor="#FFFFFF"
         android:paddingVertical="14dp"/>
@@ -102,7 +102,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="v1.0.0 — Semua fitur bisa dimatikan"
+        android:text="@string/version_info"
         android:textSize="12sp"
         android:gravity="center"
         android:textColor="@android:color/darker_gray"/>

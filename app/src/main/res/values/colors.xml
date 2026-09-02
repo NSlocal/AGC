@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="teal_200">#03DAC6</color>
-    <color name="teal_700">#018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="gray_light">#FFF5F5F5</color>
-    <color name="gray_dark">#FF424242</color>
-    <color name="green_success">#FF4CAF50</color>
-    <color name="yellow_warning">#FFFFC107</color>
-    <color name="red_error">#FFF44336</color>
-    <color name="blue_info">#FF2196F3</color>
-    <color name="fps_excellent">#4CAF50</color>
-    <color name="fps_good">#FFC107</color>
-    <color name="fps_low">#F44336</color>
-    <color name="temp_normal">#4CAF50</color>
-    <color name="temp_warning">#FF9800</color>
-    <color name="temp_critical">#F44336</color>
-    <color name="game_boost">#9C27B0</color>
-    <color name="transparent_overlay">#EE000000</color>
+    <color name="bg_card">#FFFFFFFF</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryVariant">#3700B3</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorSecondary">#03DAC6</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_light">#F5F5F5</color>
 </resources>

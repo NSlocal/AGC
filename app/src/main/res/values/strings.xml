@@ -28,4 +28,13 @@
     <string name="check_update">Cek Pembaruan</string>
     <string name="feedback">Masukan &amp; Laporan</string>
     <string name="exit">Keluar</string>
+    
+    <!-- Overlay Preference Strings -->
+    <string name="show_cpu">Show CPU Usage</string>
+    <string name="show_gpu">Show GPU Usage</string>
+    <string name="show_temp">Show Temperature</string>
+    <string name="show_battery">Show Battery Level</string>
+    <string name="bg_opacity">Background Opacity</string>
+    <string name="text_size">Text Size</string>
+    <string name="refresh_rate">Refresh Rate</string>
 </resources>

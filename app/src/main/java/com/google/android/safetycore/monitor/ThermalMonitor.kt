@@ -1,16 +1,13 @@
 package com.google.android.safetycore.monitor
 
 import android.content.Context
-import android.content.SharedPreferences
 
-class ThermalMonitor(context: Context) {
-    private val prefs = context.getSharedPreferences("SafetyCorePrefs", Context.MODE_PRIVATE)
+class SystemMonitor(private val context: Context) {
+    fun start() {
+        // Mulai pemantauan
+    }
 
-    var isFPSBoostEnabled: Boolean
-        get() = prefs.getBoolean("fps_boost", false)
-        set(value) = prefs.edit().putBoolean("fps_boost", value).apply()
-
-    fun checkThermalStatus(): Int {
-        return 0
+    fun stop() {
+        // Berhenti pemantauan
     }
 }

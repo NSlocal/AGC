@@ -1,41 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="🎨 Pilih Tema"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
-
-    <RadioGroup
-        android:id="@+id/theme_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="Ikuti Sistem" android:tag="system" android:padding="12dp"/>
-        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="🌞 Mode Terang" android:tag="light" android:padding="12dp"/>
-        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="🌙 Mode Gelap" android:tag="dark" android:padding="12dp"/>
-        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="🟢 Hijau" android:tag="green" android:padding="12dp"/>
-        <RadioButton android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="🔵 Biru" android:tag="blue" android:padding="12dp"/>
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="24dp">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="🎨 Pilih Tema" android:textSize="22sp" android:textStyle="bold" android:layout_marginBottom="24dp"/>
+    <RadioGroup android:id="@+id/theme_group" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <RadioButton android:id="@+id/theme_system" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Ikuti Sistem" android:padding="12dp"/>
+        <RadioButton android:id="@+id/theme_light" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="🌞 Mode Terang" android:padding="12dp"/>
+        <RadioButton android:id="@+id/theme_dark" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="🌙 Mode Gelap" android:padding="12dp"/>
+        <RadioButton android:id="@+id/theme_green" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="🟢 Hijau" android:padding="12dp"/>
+        <RadioButton android:id="@+id/theme_blue" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="🔵 Biru" android:padding="12dp"/>
     </RadioGroup>
-
-    <Button
-        android:id="@+id/btn_apply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Terapkan"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#6200EE"/>
-
+    <Button android:id="@+id/btn_apply" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Terapkan" android:layout_marginTop="24dp" android:backgroundTint="#6200EE"/>
 </LinearLayout>

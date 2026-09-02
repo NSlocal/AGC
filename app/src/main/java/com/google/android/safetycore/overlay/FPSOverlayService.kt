@@ -15,6 +15,10 @@ import com.google.android.safetycore.databinding.OverlayFpsBinding
 import com.google.android.safetycore.ui.SettingsActivity
 
 class FPSOverlayService : Service() {
+    companion object {
+        var isRunning = false
+    }
+
     private var overlayView: View? = null
     private lateinit var windowManager: WindowManager
     private val handler = Handler(Looper.getMainLooper())

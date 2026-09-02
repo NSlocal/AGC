@@ -50,11 +50,11 @@ object GameProfileManager {
     }
 
     fun saveProfile(context: Context, profile: GameProfile) {
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit {
-            putInt("${profile.packageName}_fps", profile.targetFps)
-            putBoolean("${profile.packageName}_antilag", profile.antiLagEnabled)
-            putBoolean("${profile.packageName}_boost", profile.boostEnabled)
-        }
+        val editor = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
+        editor.putInt("${profile.packageName}_fps", profile.targetFps)
+        editor.putBoolean("${profile.packageName}_antilag", profile.antiLagEnabled)
+        editor.putBoolean("${profile.packageName}_boost", profile.boostEnabled)
+        editor.apply()
     }
 
     fun getAllSupportedGames(): List<GameProfile> = DEFAULT_PROFILES

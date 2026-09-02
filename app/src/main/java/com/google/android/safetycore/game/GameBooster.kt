@@ -5,8 +5,8 @@ import android.util.Log
 
 class GameBooster(private val context: Context) {
 
-    private val fpsUnlocker = FPSUnlocker(context)
-    private val antiLag = AntiLag()
+    private val fpsUnlocker = FpsUnlocker
+    private val antiLag = AntiLag
 
     var isGameBoosterEnabled: Boolean = true
         set(value) {

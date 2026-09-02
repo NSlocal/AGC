@@ -22,6 +22,7 @@
     <string name="fps_unlock">Buka Kunci FPS</string>
     <string name="blur_sensitive">Blur Konten Sensitif</string>
     <string name="scan_images">Pindai Gambar</string>
+    <string name="scan_image">📸 Pindai Gambar</string>
     <string name="share_intercept">Pantau Berbagi Gambar</string>
     <string name="lock_settings">Kunci Pengaturan</string>
     <string name="backup_restore">Backup &amp; Pulihkan</string>

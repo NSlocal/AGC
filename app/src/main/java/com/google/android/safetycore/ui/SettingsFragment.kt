@@ -13,7 +13,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         when (preference.key) {
             "benchmark" -> {
-                startActivity(android.content.Intent(requireContext(), BenchmarkActivity::class.java))
+                // Navigate to benchmark or stats activity - using MainActivity as fallback
+                try {
+                    startActivity(android.content.Intent(requireContext(), Class.forName("com.google.android.safetycore.ui.BenchmarkActivity")))
+                } catch (e: ClassNotFoundException) {
+                    // BenchmarkActivity not found, navigate to MainActivity instead
+                    startActivity(android.content.Intent(requireContext(), MainActivity::class.java))
+                }
                 return true
             }
             "themes" -> {

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="purple_500">#6200EE</color>
-    <color name="green_allowed">#4CAF50</color>
-    <color name="yellow_warning">#FFC107</color>
-    <color name="red_blocked">#F44336</color>
-    <color name="blue_fps">#2196F3</color>
-    <color name="black_transparent">#CC000000</color>
-    <color name="white">#FFFFFF</color>
-</resources>
+<!-- Tambahkan di <resources> -->
+<color name="fps_excellent">#4CAF50</color>
+<color name="fps_good">#FFC107</color>
+<color name="fps_low">#F44336</color>
+<color name="temp_normal">#4CAF50</color>
+<color name="temp_warning">#FF9800</color>
+<color name="temp_critical">#F44336</color>
+<color name="game_boost">#9C27B0</color>
+<color name="transparent_overlay">#EE000000</color>

@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:orientation="vertical" android:padding="24dp">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="💾 Backup & Pulihkan" android:textSize="22sp" android:textStyle="bold" android:layout_marginBottom="24dp"/>
-    <Button android:id="@+id/btn_backup" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="📤 Backup Pengaturan" android:layout_marginBottom="16dp" android:backgroundTint="#4CAF50"/>
-    <Button android:id="@+id/btn_restore" android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="📥 Pulihkan Pengaturan" android:backgroundTint="#2196F3"/>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="\n⚠️ Backup disimpan di folder aplikasi." android:textSize="12sp" android:layout_marginTop="16dp"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Backup &amp; Restore"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/btn_backup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Backup Data"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/btn_restore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Restore Data"/>
+
 </LinearLayout>

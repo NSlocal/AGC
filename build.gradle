@@ -1,4 +1,16 @@
+// ==================================================
+// SAFETYCORE — ROOT build.gradle
+// Versi: 1.0.0 — SIAP BUILD
+// ==================================================
+
 plugins {
     id 'com.android.application' version '8.2.0' apply false
     id 'org.jetbrains.kotlin.android' version '1.9.20' apply false
 }
+
+// ==================================================
+// CATATAN:
+// HANYA 3 BARIS INI! JANGAN TAMBAH buildscript!
+// JANGAN TAMBAH repositories DI SINI!
+// Semua repositori di settings.gradle
+// ==================================================

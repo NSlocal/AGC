@@ -1,84 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
 
-    <!-- ✅ IZIN DIPERLUKAN -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+android {
+    namespace 'com.google.android.safetycore'
+    compileSdk 34
 
-    <!-- ✅ MINIMUM & TARGET SDK -->
-    <uses-sdk android:minSdkVersion="34" android:targetSdkVersion="34" />
+    defaultConfig {
+        applicationId "com.google.android.safetycore"
+        minSdk 34
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
 
-    <application
-        android:name=".SafetyCoreApp"
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="SafetyCore"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.SafetyCore"
-        android:requestLegacyExternalStorage="true">
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 
-        <!-- ============================================== -->
-        <!-- ✅ ACTIVITY — SEMUA LENGKAP -->
-        <!-- ============================================== -->
-        <activity android:name=".ui.MainActivity" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-rules.pro')
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
+        }
+    }
 
-        <activity android:name=".ui.SettingsActivity" android:exported="false" />
-        <activity android:name=".ui.ContentWarningActivity" android:exported="false"
-            android:theme="@style/Theme.SafetyCore.Transparent" />
-        <activity android:name=".ui.HistoryActivity" android:exported="false" />
-        <activity android:name=".ui.ThemeSelectorActivity" android:exported="false" />
-        <activity android:name=".ui.LockSetupActivity" android:exported="false" />
-        <activity android:name=".ui.PinVerifyActivity" android:exported="false" />
-        <activity android:name=".ui.DeviceInfoActivity" android:exported="false" />
-        <activity android:name=".ui.PreviewBlurActivity" android:exported="false"
-            android:theme="@style/Theme.SafetyCore.Transparent" />
-        <activity android:name=".ui.PrivacySettingsActivity" android:exported="false" />
-        <activity android:name=".ui.BackupRestoreActivity" android:exported="false" />
-        <activity android:name=".ui.AboutActivity" android:exported="false" />
-        <activity android:name=".ui.GameSettingsActivity" android:exported="false" />
-        <activity android:name=".ui.FeedbackActivity" android:exported="false" />
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
-        <!-- ============================================== -->
-        <!-- ✅ SERVICE — SEMUA OVERLAY & SCAN -->
-        <!-- ============================================== -->
-        <service android:name=".content.ContentScannerService"
-            android:foregroundServiceType="specialUse"
-            android:exported="false" />
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 
-        <service android:name=".overlay.BlurOverlayService" android:exported="false" />
-        <service android:name=".overlay.FPSOverlayService" android:exported="false" />
-        <service android:name=".overlay.SystemMonitorOverlayService" android:exported="false" />
-        <service android:name=".overlay.DraggableFpsOverlayService" android:exported="false" />
+    buildFeatures {
+        viewBinding true
+    }
+}
 
-        <!-- ============================================== -->
-        <!-- ✅ BROADCAST RECEIVER — SHARE INTERCEPT & KONTEN -->
-        <!-- ============================================== -->
-        <receiver android:name=".ui.ShareInterceptor" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-        </receiver>
+dependencies {
+    // ==============================================
+    // ✅ ANDROID CORE
+    // ==============================================
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
 
-        <receiver android:name=".content.ContentAwareReceiver" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
-        </receiver>
+    // ==============================================
+    // ✅ MATERIAL DESIGN 3 — UI KOMPONEN
+    // ==============================================
+    implementation 'com.google.android.material:material:1.11.0'
 
-    </application>
-</manifest>
+    // ==============================================
+    // ✅ LIFECYCLE — ARSITEKTUR MODERN
+    // ==============================================
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    implementation 'androidx.lifecycle:lifecycle-service:2.7.0'
+
+    // ==============================================
+    // ✅ COROUTINES — ASYNCHRONOUS (Update Checker)
+    // ==============================================
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+
+    // ==============================================
+    // ✅ JSON — PARSING UPDATE
+    // ==============================================
+    implementation 'org.json:json:20231013'
+
+    // ==============================================
+    // ✅ KOTLINX SERIALIZATION — RIWAYAT JSON
+    // ==============================================
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2'
+
+    // ==============================================
+    // ✅ TESTING
+    // ==============================================
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

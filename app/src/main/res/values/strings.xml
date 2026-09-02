@@ -1,41 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SafetyCore</string>
-    <string name="app_subtitle">Perlindungan Konten &amp; Pemantauan Sistem</string>
-    <string name="service_status">🔐 Status Layanan</string>
-    <string name="scan_enabled">📤 Pemindaian Gambar: ✅ Aktif</string>
-    <string name="fps_enabled">📈 FPS Monitor: ✅ Aktif</string>
-    <string name="monitor_enabled">📊 Sistem Monitor: ✅ Aktif</string>
-    <string name="settings">⚙️ Pengaturan Lengkap</string>
-    <string name="history">📋 Riwayat Pemindaian</string>
-    <string name="about">ℹ️ Tentang SafetyCore</string>
-    <string name="version_info">v1.0.0 — Semua fitur bisa dimatikan</string>
-    <string name="disabled">❌ Dinonaktifkan</string>
-    <string name="enabled">✅ Aktif</string>
-    <string name="cancel">Batal</string>
-    <string name="confirm">Konfirmasi</string>
-    <string name="save">Simpan</string>
-    <string name="theme">Tema</string>
-    <string name="privacy">Privasi</string>
-    <string name="game_boost">Game Booster</string>
-    <string name="system_monitor">Monitor Sistem</string>
-    <string name="fps_unlock">Buka Kunci FPS</string>
-    <string name="blur_sensitive">Blur Konten Sensitif</string>
-    <string name="scan_images">Pindai Gambar</string>
-    <string name="scan_image">📸 Pindai Gambar</string>
-    <string name="share_intercept">Pantau Berbagi Gambar</string>
-    <string name="lock_settings">Kunci Pengaturan</string>
-    <string name="backup_restore">Backup &amp; Pulihkan</string>
-    <string name="check_update">Cek Pembaruan</string>
-    <string name="feedback">Masukan &amp; Laporan</string>
-    <string name="exit">Keluar</string>
-    
-    <!-- Overlay Preference Strings -->
-    <string name="show_cpu">Show CPU Usage</string>
-    <string name="show_gpu">Show GPU Usage</string>
-    <string name="show_temp">Show Temperature</string>
-    <string name="show_battery">Show Battery Level</string>
-    <string name="bg_opacity">Background Opacity</string>
-    <string name="text_size">Text Size</string>
-    <string name="refresh_rate">Refresh Rate</string>
+    <string name="stat_notify_warning">Peringatan</string>
+    <string name="settings">Pengaturan</string>
+    <string name="fps_overlay">FPS Overlay</string>
+    <string name="privacy_settings">Privacy &amp; Pengaturan</string>
+    <string name="feedback">Masukan</string>
+    <string name="backup_restore">Cadangkan &amp; Pulihkan</string>
 </resources>

@@ -10,7 +10,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:8.2.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
     }
 }
-
-// ✅ TIDAK ADA baris rootProject.buildFileName! — itu yang bikin error!

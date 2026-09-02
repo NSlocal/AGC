@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- ✅ IZIN DIPERLUKAN -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- ✅ MINIMUM & TARGET SDK -->
+    <uses-sdk android:minSdkVersion="34" android:targetSdkVersion="34" />
 
     <application
         android:name=".SafetyCoreApp"
@@ -14,15 +18,19 @@
         android:icon="@drawable/ic_launcher"
         android:label="SafetyCore"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SafetyCore">
+        android:theme="@style/Theme.SafetyCore"
+        android:requestLegacyExternalStorage="true">
 
-        <!-- ACTIVITY UTAMA -->
+        <!-- ============================================== -->
+        <!-- ✅ ACTIVITY — SEMUA LENGKAP -->
+        <!-- ============================================== -->
         <activity android:name=".ui.MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.SettingsActivity" android:exported="false" />
         <activity android:name=".ui.ContentWarningActivity" android:exported="false"
             android:theme="@style/Theme.SafetyCore.Transparent" />
@@ -36,16 +44,34 @@
         <activity android:name=".ui.PrivacySettingsActivity" android:exported="false" />
         <activity android:name=".ui.BackupRestoreActivity" android:exported="false" />
         <activity android:name=".ui.AboutActivity" android:exported="false" />
+        <activity android:name=".ui.GameSettingsActivity" android:exported="false" />
+        <activity android:name=".ui.FeedbackActivity" android:exported="false" />
 
-        <!-- SERVICE -->
+        <!-- ============================================== -->
+        <!-- ✅ SERVICE — SEMUA OVERLAY & SCAN -->
+        <!-- ============================================== -->
         <service android:name=".content.ContentScannerService"
-            android:foregroundServiceType="specialUse" android:exported="false" />
+            android:foregroundServiceType="specialUse"
+            android:exported="false" />
+
         <service android:name=".overlay.BlurOverlayService" android:exported="false" />
         <service android:name=".overlay.FPSOverlayService" android:exported="false" />
         <service android:name=".overlay.SystemMonitorOverlayService" android:exported="false" />
+        <service android:name=".overlay.DraggableFpsOverlayService" android:exported="false" />
 
-        <!-- BROADCAST RECEIVER -->
+        <!-- ============================================== -->
+        <!-- ✅ BROADCAST RECEIVER — SHARE INTERCEPT & KONTEN -->
+        <!-- ============================================== -->
         <receiver android:name=".ui.ShareInterceptor" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".content.ContentAwareReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <action android:name="android.intent.action.SEND_MULTIPLE" />

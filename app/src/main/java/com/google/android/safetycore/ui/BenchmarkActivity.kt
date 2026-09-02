@@ -1,13 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <bool name="default_dark_mode">true</bool>
-    <bool name="default_show_fps">true</bool>
-    <bool name="default_show_cpu">true</bool>
-    <bool name="default_show_gpu">true</bool>
-    <bool name="default_show_temp">true</bool>
-    <bool name="default_show_battery">true</bool>
-    <bool name="auto_start_overlay">false</bool>
-    <bool name="enable_animations">true</bool>
-    <bool name="enable_game_monitor">true</bool>
-</resources>
-  
+package com.google.android.safetycore.ui
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.safetycore.databinding.ActivityBenchmarkBinding
+
+class BenchmarkActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityBenchmarkBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityBenchmarkBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
+        // Benchmark functionality can be implemented here
+    }
+}

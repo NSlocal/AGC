@@ -33,7 +33,7 @@ class SystemMonitorOverlayService : Service() {
                 binding.tvCpu.text = "CPU: ${cpu.toInt()}%"
                 binding.tvGpu.text = "GPU: ${gpu.toInt()}%"
                 binding.tvTemp.text = "Temp: ${temp.toInt()}°C"
-                binding.tvBatteryTemp.text: "Batt: ${battTemp.toInt()}°C"
+                binding.tvBatteryTemp.text = "Batt: ${battTemp.toInt()}°C"
 
                 binding.tvCpu.setTextColor(
                     if (cpu < 70) 0xFF4CAF50.toInt()

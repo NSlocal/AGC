@@ -7,6 +7,6 @@ import com.google.android.safetycore.R
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(android.R.layout.activity_list_item)
+        setContentView(R.layout.activity_settings)
     }
 }

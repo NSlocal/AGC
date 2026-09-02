@@ -1,3 +1,8 @@
+// ==================================================
+// SAFETYCORE — settings.gradle
+// Versi: 1.0.0 — SIAP BUILD
+// ==================================================
+
 pluginManagement {
     repositories {
         google()
@@ -5,6 +10,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,5 +18,13 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "SafetyCore"
 include ':app'
+
+// ==================================================
+// KUNCI:
+// - FAIL_ON_PROJECT_REPOS = mencegah duplikat repo
+// - HANYA google() + mavenCentral() = cukup
+// - include ':app' = wajib ada!
+// ==================================================

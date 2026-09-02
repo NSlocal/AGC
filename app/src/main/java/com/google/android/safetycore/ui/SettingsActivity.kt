@@ -19,12 +19,16 @@ class SettingsActivity : AppCompatActivity() {
         const val KEY_BLOCK = "block_sensitive"
         const val KEY_FPS = "fps_overlay_enabled"
         const val KEY_BLUR_OVERLAY = "blur_overlay_enabled"
+        const val KEY_HISTORY = "history_enabled"
+        const val KEY_GAME_BOOST = "game_boost_enabled"
 
         fun isScanEnabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean(KEY_SCAN, true)
         fun isAutoBlurEnabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean(KEY_BLUR_AUTO, true)
         fun isBlockEnabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean(KEY_BLOCK, true)
         fun isFPSOverlayEnabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean(KEY_FPS, false)
         fun isBlurOverlayEnabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean(KEY_BLUR_OVERLAY, false)
+        fun isHistoryEnabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean(KEY_HISTORY, true)
+        fun isGameBoostEnabled(ctx: Context) = ctx.getSharedPreferences(PREFS, MODE_PRIVATE).getBoolean(KEY_GAME_BOOST, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

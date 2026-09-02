@@ -8,10 +8,12 @@ import com.google.android.safetycore.ui.SettingsActivity
 object AntiLag {
     private val handler = Handler(Looper.getMainLooper())
     private var isActive = false
+    private var currentContext: Context? = null
 
     private val monitorRunnable = object : Runnable {
         override fun run() {
-            if (!SettingsActivity.isGameBoostEnabled(android.app.Application.instance)) {
+            val context = currentContext ?: return
+            if (!SettingsActivity.isGameBoostEnabled(context)) {
                 stop()
                 return
             }
@@ -22,6 +24,7 @@ object AntiLag {
 
     fun start(context: Context) {
         if (isActive || !SettingsActivity.isGameBoostEnabled(context)) return
+        currentContext = context
         isActive = true
         handler.post(monitorRunnable)
     }

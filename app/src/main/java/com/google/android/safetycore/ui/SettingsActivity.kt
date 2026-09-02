@@ -56,7 +56,7 @@ class SettingsActivity : AppCompatActivity() {
             if (v) startService(Intent(this, BlurOverlayService::class.java))
             else stopService(Intent(this, BlurOverlayService::class.java))
         }
-        binding.btnStopAll.setOnClickListener {
+        binding.btnStopAll?.setOnClickListener {
             prefs.edit().clear().apply()
             stopService(Intent(this, FPSOverlayService::class.java))
             stopService(Intent(this, BlurOverlayService::class.java))

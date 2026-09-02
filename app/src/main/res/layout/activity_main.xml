@@ -4,19 +4,107 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="center_horizontal"
     android:background="#F5F5F5">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="🛡️ SafetyCore" android:textSize="28sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:text="Perlindungan konten & pemantauan FPS" android:textSize="14sp" android:layout_marginBottom="40dp"/>
-    <Button android:id="@+id/btn_scan_image" android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="🖼️ Pindai Gambar" android:textSize="16sp" android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/purple_500"/>
-    <Button android:id="@+id/btn_settings" android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="⚙️ Pengaturan" android:textSize="16sp" android:layout_marginBottom="16dp"
-        android:backgroundTint="#757575"/>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="✅ Diizinkan • ⚠️ Peringatan • 🚫 Diblokir • ❓ Tidak Diklasifikasikan"
-        android:textSize="13sp" android:padding="16dp" android:background="#E8F5E9" android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🛡️ SafetyCore"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Perlindungan Konten & Pemantauan Sistem"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginBottom="40dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="16dp"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🔐 Status Layanan"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:id="@+id/tv_scan_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📤 Pemindaian Gambar: ✅ Aktif"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_fps_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📈 FPS Monitor: ✅ Aktif"
+            android:textSize="14sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_monitor_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📊 Sistem Monitor: ✅ Aktif"
+            android:textSize="14sp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⚙️ Pengaturan Lengkap"
+        android:backgroundTint="#6200EE"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="12dp"
+        android:paddingVertical="14dp"/>
+
+    <Button
+        android:id="@+id/btn_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📋 Riwayat Pemindaian"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="12dp"
+        android:paddingVertical="14dp"/>
+
+    <Button
+        android:id="@+id/btn_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ℹ️ Tentang SafetyCore"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:paddingVertical="14dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="v1.0.0 — Semua fitur bisa dimatikan"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textColor="@android:color/darker_gray"/>
+
 </LinearLayout>

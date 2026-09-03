@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.google.android.safetycore'
+    namespace 'com.nslocal.agc'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.google.android.safetycore"
+        applicationId "com.nslocal.agc"
         minSdk 24
         targetSdk 34
         versionCode 1

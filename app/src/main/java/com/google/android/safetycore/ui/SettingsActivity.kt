@@ -1,7 +1,7 @@
-package com.google.android.safetycore.ui
+package com.nslocal.agc.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.safetycore.R
+import com.nslocal.agc.R
 class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
